@@ -5,6 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import se.mickelus.tetra.gui.GuiModuleOffsets;
+import se.mickelus.tetra.items.modular.IModularItem;
 import se.mickelus.tetra.items.modular.ModularItem;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -48,5 +49,21 @@ public class ModularArtifact extends ModularItem implements ICurio {
     @Override
     public ItemStack getStack() {
         return null;
+    }
+
+    /**
+     * {@return a working artifact, for the creative tabs}
+     *
+     * <p>Both required slots are filled, because an artifact missing either is an empty casing that
+     * does nothing and reads as broken. Iron and redstone are the plainest material each slot takes.
+     */
+    public static ItemStack setupArtifact() {
+        ItemStack itemStack = new ItemStack(instance);
+
+        IModularItem.putModuleInSlot(itemStack, artifactCasing, "artifact/casing/relic", "relic/iron");
+        IModularItem.putModuleInSlot(itemStack, artifactInternal, "artifact/internal/orb", "orb/redstone_dust");
+        IModularItem.updateIdentifier(itemStack);
+
+        return itemStack;
     }
 }

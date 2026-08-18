@@ -8,12 +8,19 @@ import net.acetheeldritchking.art_of_forging.effects.potion.PotionEffects;
 import net.acetheeldritchking.art_of_forging.loot.ModLootModifiers;
 import net.acetheeldritchking.art_of_forging.capabilities.AoFAttachments;
 import net.acetheeldritchking.art_of_forging.item.AoFCreativeModeTab;
+import net.acetheeldritchking.art_of_forging.item.modular.ModularArtifact;
 import net.acetheeldritchking.art_of_forging.networking.AoFPackets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import se.mickelus.tetra.TetraMod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.bus.api.IEventBus;
@@ -23,11 +30,19 @@ import org.slf4j.Logger;
 @Mod(ArtOfForging.MOD_ID)
 public class ArtOfForging {
     public static final String MOD_ID = "art_of_forging";
+
+    /**
+     * Tetra's own tab, which its registry names "default". Built by id rather than read off
+     * TetraRegistries, whose holder for it is private.
+     */
+    private static final ResourceKey<CreativeModeTab> tetraTab = ResourceKey.create(
+            Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(TetraMod.MOD_ID, "default"));
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public ArtOfForging(IEventBus bus) {
         bus.addListener(this::commonSetup);
         bus.addListener(AoFPackets::register);
+        bus.addListener(this::onBuildContents);
         if (FMLEnvironment.getDist().isClient()) {
             bus.addListener(ClientModEvents::onClientSetup);
         }
@@ -123,6 +138,16 @@ public class ArtOfForging {
 
         // Register ourselves for server and other game events we are interested in
         NeoForge.EVENT_BUS.register(this);
+    }
+
+    /**
+      * The artifact was in no creative tab at all, not this mod's and not Tetra's, so the only way
+      * to one was a command. It belongs with the other modular items.
+      */
+    private void onBuildContents(BuildCreativeModeTabContentsEvent event) {
+        if (tetraTab.equals(event.getTabKey())) {
+            event.accept(ModularArtifact.setupArtifact());
+        }
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

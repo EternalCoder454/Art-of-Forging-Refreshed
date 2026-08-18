@@ -1,0 +1,9 @@
+{
+    "item": "tetra:modular_artifact",
+    "icon": {
+        "textureLocation": "tetra:textures/gui/aof_holo.png",
+        "textureX": 0,
+        "textureY": 218
+    },
+    "position": 8
+}

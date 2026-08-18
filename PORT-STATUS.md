@@ -5,6 +5,10 @@ MindFaer, carried from 1.20.1 Forge to 26.1.2 NeoForge.
 
 ## State
 
+**Bundled inside Tetra Refreshed with jarJar**, which is the shape Ace asked for. It stays its own
+repository and its own mod id, publishes to mavenLocal, and NeoForge loads it from inside Tetra's
+jar. Build order and the circular first build are in [DEV.md](DEV.md).
+
 **It compiles and it builds. Nothing has been run.** 698 compile errors down to zero, and the jar
 packages, but no world has been loaded with it and no item has been crafted, held or swung. Treat
 every claim below as "the code says so", not "it works".
@@ -102,6 +106,16 @@ mod bus event, with the handler given at registration rather than living on the 
 **The creative tab was never registered.** `AoFCreativeModeTab` has a `register` method that nothing
 called, so none of the 30 items it lists had a tab to appear in. It is registered now, which is a
 change in behaviour rather than a port, and is worth knowing when comparing against 1.20.1.
+
+**The modular artifact was in no tab at all**, not Tetra's and not this mod's own, which lists the
+ingredients and not the item they are for. It is in both now, and ninth in the holosphere. That is
+also a change in behaviour rather than a port.
+
+**Eleven shared data files were replacing rather than merging.** Tetra, Secrets of Forging and this
+mod all ship a `data/tetra/modules/sword/socket.json` and two more like it, and every copy asked to
+replace, so whichever loaded last discarded the others along with their variants. The copies here
+set `"replace": false` now. `tools/check-bundle-collisions.py` in Tetra reports any path more than
+one jar in the bundle claims.
 
 **The loot modifiers do not match their own codec.** `AddItemModifier` reads a field named `item`,
 a single item. All nine data files write `items`, a list. That mismatch predates this port and is

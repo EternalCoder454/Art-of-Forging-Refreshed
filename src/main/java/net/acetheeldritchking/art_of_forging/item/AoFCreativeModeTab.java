@@ -2,6 +2,7 @@ package net.acetheeldritchking.art_of_forging.item;
 
 import net.acetheeldritchking.art_of_forging.AoFRegistry;
 import net.acetheeldritchking.art_of_forging.ArtOfForging;
+import net.acetheeldritchking.art_of_forging.item.modular.ModularArtifact;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -18,6 +19,8 @@ public class AoFCreativeModeTab {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(AoFRegistry.FORGED_STEEL_INGOT.get()))
                     .title(Component.translatable("creativetab.art_of_forging"))
                     .displayItems((pParameters, pOutput) -> {
+                        // the item this whole tab is ingredients for, which it used to leave out
+                        pOutput.accept(ModularArtifact.setupArtifact());
                         pOutput.accept(AoFRegistry.CURIOUS_ARTIFACT.get());
 
 
