@@ -1,7 +1,17 @@
 # Port status
 
-Art of Forging, a Tetra addon by [AceTheEldritchKing](https://github.com/AceTheEldritchKing) and
-MindFaer, carried from 1.20.1 Forge to 26.1.2 NeoForge.
+Art of Forging by [AceTheEldritchKing](https://github.com/AceTheEldritchKing) and MindFaer, carried
+from 1.20.1 Forge to 26.1.2 NeoForge.
+
+**It is an addon for Secrets of Forging: Revelations**, which is itself an addon for Tetra:
+
+```
+Tetra  <-  Secrets of Forging: Revelations  <-  Art of Forging
+```
+
+That chain is declared, so NeoForge loads them in that order. It matters: this mod's schematics
+target `polearm/head` and `polearm/handle`, slots that exist only because Secrets of Forging defines
+them, and its data merges on top of Secrets of Forging's rather than beside it.
 
 ## State
 
@@ -13,7 +23,8 @@ jar. Build order and the circular first build are in [DEV.md](DEV.md).
 packages, but no world has been loaded with it and no item has been crafted, held or swung. Treat
 every claim below as "the code says so", not "it works".
 
-Requires **Tetra Refreshed 6.13.0**, **Mutil Refreshed 7.0.0-pre.0** and **Curios 15.0.0** or later.
+Requires **Tetra Refreshed 6.13.0**, **Secrets of Forging: Revelations 1.3.5**,
+**Mutil Refreshed 7.0.0-pre.0** and **Curios 15.0.0** or later.
 
 ## Permission
 
@@ -129,6 +140,12 @@ the same thing.
 
 **`tetratic` and `bettercombat` compatibility data is untouched.** Neither mod is in the test pack,
 so those files were carried over as they were and have not been looked at.
+
+**Nothing registers a greatsword.** Secrets of Forging ships 88 files of greatsword content, modules
+for `greatsword/blade` and `greatsword/hilt`, and this mod's nano fused hone names those slots too.
+No java in Tetra, Secrets of Forging or this mod registers a greatsword item, and none ever did in
+this repository's history. All of it is inert until whatever registers that item is found, which is
+most likely one of Ace's other mods or Tetra: Enlarged, the mod the `tetratic` data here is for.
 
 **No play testing.** See [PLAYTESTING.md](PLAYTESTING.md).
 

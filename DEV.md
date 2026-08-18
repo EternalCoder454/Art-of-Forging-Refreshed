@@ -4,9 +4,19 @@ Building this addon, and how it reaches into Tetra without Tetra knowing about i
 the permission position see [PORT-STATUS.md](PORT-STATUS.md) and
 [dev-permission.md](dev-permission.md).
 
-This is bundled inside Tetra Refreshed rather than installed alongside it, at Ace's request. It
-stays its own mod with its own id, and Tetra embeds the jar with jarJar. Nothing about this project
-lives in Tetra's source tree.
+**This is an addon for Secrets of Forging: Revelations, which is an addon for Tetra.**
+
+```
+Tetra  <-  Secrets of Forging: Revelations  <-  Art of Forging
+```
+
+Both of the addons are bundled inside Tetra Refreshed rather than installed alongside it, at Ace's
+request. Each stays its own mod with its own id, and Tetra embeds both jars with jarJar. Nothing
+about this project lives in Tetra's source tree.
+
+The chain is declared in `neoforge.mods.toml`, so NeoForge loads Secrets of Forging first. That is
+not cosmetic: this mod's schematics target `polearm/head` and `polearm/handle`, which exist only
+because Secrets of Forging defines them, and its shared data merges on top of that mod's.
 
 ## Building
 
@@ -15,10 +25,15 @@ Gradle 9.7.0, ModDevGradle 2.0.144, Java 25, NeoForge 26.1.2.95.
 Tetra and mutil come from mavenLocal, and Tetra then embeds this, so the order matters:
 
 ```bash
-cd "../Mutil Refreshed"          && ./gradlew.bat publishToMavenLocal
-cd "../Art-of-Forging-Refreshed" && ./gradlew.bat build publishToMavenLocal
-cd "../Tetra Refreshed"          && ./gradlew.bat build
+cd "../Mutil Refreshed"                && ./gradlew.bat publishToMavenLocal
+cd "../Secrets-Of-Forging-Revelations" && ./gradlew.bat build publishToMavenLocal
+cd "../Art-of-Forging-Refreshed"       && ./gradlew.bat build publishToMavenLocal
+cd "../Tetra Refreshed"                && ./gradlew.bat build
 ```
+
+**Nothing here compiles against Secrets of Forging.** The dependency is a load time one, declared so
+the data lands in the right order, so the build order between those two is about the bundle rather
+than the compiler.
 
 That last step is what embeds this jar into Tetra's. Skipping it leaves Tetra shipping the previous
 build of this mod, which looks exactly like a change that did not take.
@@ -44,9 +59,12 @@ Tetra's stores only read their own namespace.
 | `data/tetra/materials/{metal,fibre,misc,socket}` | additions to Tetra's own categories |
 | `data/tetra/schematics` | what can be crafted onto what, including onto Tetra's own items |
 | `data/art_of_forging/curios/entities` | grants the player the charm slot |
-| `assets/tetra/textures/gui/aof_glyph.png` | the glyphs its modules draw |
 | `assets/tetra/textures/gui/aof_holo.png` | the holosphere icon |
 | `assets/tetra/holosphere_entries` | the artifact's holosphere entry |
+
+**`aof_glyph.png` is shipped by Secrets of Forging, not here**, despite the name. That mod draws it
+for three of its own polearm modules and can run without this one, so it has to carry it. This mod
+requires that one, so the sheet is always there.
 
 ## Reaching into Tetra from this side
 

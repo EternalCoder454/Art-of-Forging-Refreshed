@@ -39,6 +39,13 @@ ordering="AFTER"
 side="BOTH"
 
 [[dependencies.${mod_id}]]
+modId="secrets_of_forging_revelations"
+type="required"
+versionRange="${sofr_version_range}"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
 modId="curios"
 type="required"
 versionRange="${curios_version_range}"
