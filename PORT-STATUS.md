@@ -19,7 +19,12 @@ them, and its data merges on top of Secrets of Forging's rather than beside it.
 repository and its own mod id, publishes to mavenLocal, and NeoForge loads it from inside Tetra's
 jar. Build order and the circular first build are in [DEV.md](DEV.md).
 
-**It compiles and it builds. Nothing has been run.** 698 compile errors down to zero, and the jar
+**The first launch failed** during mod construction, on a charged ability registered on the game bus
+with no listener on it, which Forge ignored and NeoForge throws for. That is fixed and
+`tools/check-bus-registrations.py` in Tetra now catches the shape of it. **The fixed build has not
+been launched yet**, so whether it gets past construction is still unproven.
+
+**Nothing has been played.** 698 compile errors down to zero, and the jar
 packages, but no world has been loaded with it and no item has been crafted, held or swung. Treat
 every claim below as "the code says so", not "it works".
 

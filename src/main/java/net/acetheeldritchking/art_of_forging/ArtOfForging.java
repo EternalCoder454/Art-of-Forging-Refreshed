@@ -111,8 +111,9 @@ public class ArtOfForging {
         NeoForge.EVENT_BUS.register(new BeheadingEffect());
         // Soul Charged
         NeoForge.EVENT_BUS.register(new SoulChargedEffect());
-        // Sonic Shock
-        NeoForge.EVENT_BUS.register(new SonicShockEffect());
+        // Sonic Shock is a charged ability and nothing else. It carries no listener, so registering
+        // it on the game bus did nothing under Forge and throws under NeoForge. It reaches the game
+        // through ItemModularHandheld.registerAbility, in EffectGuiStats.setupAbilites.
         // Conquering
         NeoForge.EVENT_BUS.register(new ConqueringEffect());
         // Subjugation
