@@ -4,10 +4,9 @@ import net.acetheeldritchking.art_of_forging.ArtOfForging;
 import net.acetheeldritchking.art_of_forging.effects.SonicShockEffect;
 import net.acetheeldritchking.art_of_forging.effects.SoulChargedEffect;
 import net.acetheeldritchking.art_of_forging.effects.SubjugationEffect;
-import net.acetheeldritchking.art_of_forging.mixins.tetra.ItemModularHandheldAccessor;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.registries.ForgeRegistries;
 import se.mickelus.tetra.effect.ChargedAbilityEffect;
+import se.mickelus.tetra.items.modular.ItemModularHandheld;
 import se.mickelus.tetra.effect.ItemEffect;
 
 import java.util.ArrayList;
@@ -328,7 +327,7 @@ public class EffectGuiStats {
 
     // Bosses
     public static boolean isBossEntity(EntityType<?> entity) {
-        return Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.tags()).getTag(BOSS_ENTITIES).contains(entity);
+        return entity.builtInRegistryHolder().is(BOSS_ENTITIES);
     }
 
     // Percentage Math
@@ -346,22 +345,16 @@ public class EffectGuiStats {
 
 
     // Charged Abilities
-    public static List<ChargedAbilityEffect> setupAbilites() {
-        List<ChargedAbilityEffect> list = new ArrayList<>();
-        list.addAll(Arrays.stream(ItemModularHandheldAccessor.getAbilities()).toList());
-
-        // Add abilities here
-        list.add(SoulChargedEffect.instance);
-        list.add(SonicShockEffect.instance);
-        list.add(SubjugationEffect.instance);
-
-        // End of abilities
-        list = list.stream().filter(Objects::nonNull).toList();
-        ChargedAbilityEffect[] abilityEffects = list.toArray(new ChargedAbilityEffect[list.size()]);
-        for (int i = 0; i < list.size(); i++) {
-            abilityEffects[i] = list.get(i);
-        }
-        ItemModularHandheldAccessor.setAbilities(abilityEffects);
-        return list;
+    /**
+     * Offer this mod's three charged abilities on every handheld modular item.
+     *
+     * <p>This used to read Tetra's ability array through a mixin accessor, append to a copy, and
+     * write the copy back from a hook on Tetra's static initialiser. Tetra takes registrations now,
+     * so both mixins are gone and this is three calls.
+     */
+    public static void setupAbilites() {
+        ItemModularHandheld.registerAbility(SoulChargedEffect.instance);
+        ItemModularHandheld.registerAbility(SonicShockEffect.instance);
+        ItemModularHandheld.registerAbility(SubjugationEffect.instance);
     }
 }

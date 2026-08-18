@@ -1,62 +1,43 @@
 package net.acetheeldritchking.art_of_forging.networking;
 
-import net.acetheeldritchking.art_of_forging.ArtOfForging;
+import net.acetheeldritchking.art_of_forging.networking.packet.LifeStealPacketHandler;
 import net.acetheeldritchking.art_of_forging.networking.packet.LifeStealParticlesS2CPacket;
+import net.acetheeldritchking.art_of_forging.networking.packet.SoulChargedPacketHandler;
 import net.acetheeldritchking.art_of_forging.networking.packet.SoulChargedParticlesS2CPacket;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
+/**
+ * The two clientbound particle packets.
+ *
+ * <p>SimpleChannel and its message builder are gone. Payloads are registered against a registrar
+ * on a mod bus event, and the handler is given where the payload is registered rather than living
+ * on the packet. Both of these only tell a client where to draw particles.
+ */
 public class AoFPackets {
-    private static SimpleChannel INSTANCE;
+    public static void register(RegisterPayloadHandlersEvent event) {
+        PayloadRegistrar registrar = event.registrar("1.0");
 
-    private static int packetId = 0;
+        registrar.playToClient(LifeStealParticlesS2CPacket.TYPE,
+                LifeStealParticlesS2CPacket.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> LifeStealPacketHandler
+                        .doLifestealParticles(payload.xPos(), payload.yPos(), payload.zPos())));
 
-    private static int id() {
-        return packetId++;
+        registrar.playToClient(SoulChargedParticlesS2CPacket.TYPE,
+                SoulChargedParticlesS2CPacket.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> SoulChargedPacketHandler
+                        .doSoulParticles(payload.xPos(), payload.yPos(), payload.zPos())));
     }
 
-    public static void register() {
-        SimpleChannel net = NetworkRegistry.ChannelBuilder
-                .named(new ResourceLocation(ArtOfForging.MOD_ID,
-                        "aof_packets"))
-                .networkProtocolVersion(() -> "1.0")
-                .clientAcceptedVersions(s -> true)
-                .serverAcceptedVersions(s -> true)
-                .simpleChannel();
-
-        INSTANCE = net;
-
-        // Server to Client
-
-        // Life Steal Circle Particles
-        net.messageBuilder(LifeStealParticlesS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(LifeStealParticlesS2CPacket::new)
-                .encoder(LifeStealParticlesS2CPacket::toBytes)
-                .consumerMainThread(LifeStealParticlesS2CPacket::handle)
-                .add();
-
-        // Soul Charge Circle Particles
-        net.messageBuilder(SoulChargedParticlesS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(SoulChargedParticlesS2CPacket::new)
-                .encoder(SoulChargedParticlesS2CPacket::toBytes)
-                .consumerMainThread(SoulChargedParticlesS2CPacket::handle)
-                .add();
+    public static void sendToPlayer(CustomPacketPayload message, ServerPlayer player) {
+        PacketDistributor.sendToPlayer(player, message);
     }
 
-    public static <MSG> void sendToClient(MSG message) {
-        INSTANCE.sendToServer(message);
-    }
-
-    public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
-        INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
-    }
-
-    public static <MGS> void sendToEntity(MGS message, LivingEntity entity) {
-        INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), message);
+    public static void sendToEntity(CustomPacketPayload message, LivingEntity entity) {
+        PacketDistributor.sendToPlayersTrackingEntity(entity, message);
     }
 }

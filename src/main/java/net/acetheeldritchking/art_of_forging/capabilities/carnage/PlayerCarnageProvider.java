@@ -1,51 +1,28 @@
 package net.acetheeldritchking.art_of_forging.capabilities.carnage;
 
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.CapabilityToken;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.common.util.LazyOptional;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.acetheeldritchking.art_of_forging.capabilities.AoFAttachments;
+import net.minecraft.world.entity.Entity;
 
-public class PlayerCarnageProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
-    public static Capability<PlayerCarnage> PLAYER_CARNAGE =
-            CapabilityManager.get(new CapabilityToken<PlayerCarnage>() {
-                // Not overriding anything here
-            });
+import java.util.Optional;
 
-    private PlayerCarnage carnage = null;
-    private final LazyOptional<PlayerCarnage> optional = LazyOptional.of(this::createPlayerCarnage);
+/**
+ * Reaches the carnage value hung off an entity.
+ *
+ * <p>This was a capability provider. Capabilities are gone, so it is an attachment now, and all
+ * that is left here is the lookup. It still hands back an Optional so the callers that were written
+ * against the capability api keep working unchanged.
+ */
+public class PlayerCarnageProvider {
+    private PlayerCarnageProvider() {
+    }
 
-    private PlayerCarnage createPlayerCarnage() {
-        if (this.carnage == null) {
-            this.carnage = new PlayerCarnage();
+    /**
+     * {@return the carnage value for this entity, empty for anything that is not a player}
+     */
+    public static Optional<PlayerCarnage> get(Entity entity) {
+        if (!(entity instanceof net.minecraft.world.entity.player.Player)) {
+            return Optional.empty();
         }
-
-        return this.carnage;
-    }
-
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == PLAYER_CARNAGE) {
-            return optional.cast();
-        }
-
-        return LazyOptional.empty();
-    }
-
-    @Override
-    public CompoundTag serializeNBT() {
-        CompoundTag nbt = new CompoundTag();
-        createPlayerCarnage().saveNBTdata(nbt);
-        return nbt;
-    }
-
-    @Override
-    public void deserializeNBT(CompoundTag nbt) {
-        createPlayerCarnage().loadNBTdata(nbt);
+        return Optional.of(entity.getData(AoFAttachments.CARNAGE));
     }
 }

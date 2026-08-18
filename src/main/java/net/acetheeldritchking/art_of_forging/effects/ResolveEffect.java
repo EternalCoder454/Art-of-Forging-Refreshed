@@ -5,10 +5,10 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import se.mickelus.tetra.blocks.workbench.gui.WorkbenchStatsGui;
 import se.mickelus.tetra.gui.stats.StatsHelper;
 import se.mickelus.tetra.gui.stats.bar.GuiStatBar;
@@ -36,8 +36,8 @@ public class ResolveEffect {
     }
 
     @SubscribeEvent
-    public void onPlayerTickEvent(TickEvent.PlayerTickEvent event) {
-        ItemStack heldStack = event.player.getMainHandItem();
+    public void onPlayerTickEvent(PlayerTickEvent.Post event) {
+        ItemStack heldStack = event.getEntity().getMainHandItem();
 
         if (heldStack.getItem() instanceof ModularItem item) {
             // Duration of potion
@@ -47,23 +47,23 @@ public class ResolveEffect {
             float eff = item.getEffectEfficiency(heldStack, resolveEffect);
 
             // Attacker health
-            float health = event.player.getHealth();
+            float health = event.getEntity().getHealth();
 
             if (level > 0 && eff >= health) {
-                applyEffects(level, event.player);
+                applyEffects(level, event.getEntity());
             }
         }
 
         // For curio effect
-        Player player = event.player;
+        Player player = event.getEntity();
 
         // Finds curio and applies effect
-        CuriosApi.getCuriosHelper().findCurios(player, itemStack ->
+        CuriosApi.getCuriosInventory(player).ifPresent(inv -> inv.findCurios(itemStack ->
                 itemStack.getItem() instanceof ModularItem).forEach
                 (slotResult -> {
                     slotResult.stack();
 
-                    if (event.player.tickCount % 20 == 0)
+                    if (event.getEntity().tickCount % 20 == 0)
                     {
                         ItemStack itemStack = slotResult.stack();
                         ModularItem item = (ModularItem) itemStack.getItem();
@@ -82,15 +82,15 @@ public class ResolveEffect {
                             applyEffects(level, player);
                         }
                     }
-                });
+                }));
     }
 
     private void applyEffects(int duration, LivingEntity user) {
-        user.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, duration * 20,
+        user.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, duration * 20,
                 1, true, true, true));
-        user.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, duration * 20,
+        user.addEffect(new MobEffectInstance(MobEffects.STRENGTH, duration * 20,
                 1, true, true, true));
-        user.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, duration * 20,
+        user.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, duration * 20,
                 1, true, true, true));
     }
 }

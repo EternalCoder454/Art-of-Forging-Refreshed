@@ -3,7 +3,6 @@ package net.acetheeldritchking.art_of_forging.networking.packet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.DustColorTransitionOptions;
 import net.minecraft.world.level.Level;
-import org.joml.Vector3f;
 
 public class LifeStealPacketHandler {
     public static void doLifestealParticles(double xPos, double yPos, double zPos) {
@@ -21,9 +20,7 @@ public class LifeStealPacketHandler {
                 double targetY = yPos;
                 double targetZ = zPos + offsetZ;
 
-                world.addParticle(new DustColorTransitionOptions
-                                (new Vector3f(0.78F, 0.18F, 0.18F),
-                                        new Vector3f(0.0F, 0.0F, 0.0F), 1.0F),
+                world.addParticle(new DustColorTransitionOptions(0xc72e2e, 0x000000, 1.0F),
                         targetX, targetY, targetZ,
                         offsetX * speedFactor, 0.15D, offsetZ * speedFactor);
             }

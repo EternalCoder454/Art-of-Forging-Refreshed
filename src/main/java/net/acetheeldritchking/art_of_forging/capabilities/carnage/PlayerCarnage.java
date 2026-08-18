@@ -1,8 +1,10 @@
 package net.acetheeldritchking.art_of_forging.capabilities.carnage;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.common.util.ValueIOSerializable;
 
-public class PlayerCarnage {
+public class PlayerCarnage implements ValueIOSerializable {
     private int carnage;
     private final int MAX_CARNAGE = 5;
     private final int MIN_CARNAGE = 0;
@@ -32,11 +34,13 @@ public class PlayerCarnage {
         this.carnage = source.carnage;
     }
 
-    public void saveNBTdata(CompoundTag nbt) {
-        nbt.putInt("carnage", carnage);
+    @Override
+    public void serialize(ValueOutput output) {
+        output.putInt("carnage", carnage);
     }
 
-    public void loadNBTdata(CompoundTag nbt) {
-        carnage = nbt.getInt("carnage");
+    @Override
+    public void deserialize(ValueInput input) {
+        carnage = input.getIntOr("carnage", 0);
     }
 }

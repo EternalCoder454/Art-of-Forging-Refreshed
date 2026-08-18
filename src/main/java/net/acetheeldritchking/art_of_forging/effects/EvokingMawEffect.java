@@ -5,10 +5,10 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import se.mickelus.tetra.blocks.workbench.gui.WorkbenchStatsGui;
 import se.mickelus.tetra.gui.stats.bar.GuiStatBar;
 import se.mickelus.tetra.gui.stats.getter.IStatGetter;
@@ -36,7 +36,7 @@ public class EvokingMawEffect {
     }
 
     @SubscribeEvent
-    public void onLivingAttackEvent(LivingDamageEvent event)
+    public void onLivingAttackEvent(LivingIncomingDamageEvent event)
     {
         LivingEntity target = event.getEntity();
         Entity eAttacker = event.getSource().getEntity();
@@ -52,10 +52,10 @@ public class EvokingMawEffect {
                 // Duration of jaw effect
                 int eff = (int) item.getEffectEfficiency(heldStack, evokingMaw);
 
-                if (level > 0 && !attacker.level.isClientSide())
+                if (level > 0 && !attacker.level().isClientSide())
                 {
                     target.addEffect(new MobEffectInstance
-                            (PotionEffects.EVOKING_MAW.get(), eff*20, level,
+                            (PotionEffects.EVOKING_MAW, eff*20, level,
                                     false, false, false));
                 }
             }

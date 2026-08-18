@@ -1,40 +1,31 @@
 package net.acetheeldritchking.art_of_forging.networking.packet;
 
+import net.acetheeldritchking.art_of_forging.ArtOfForging;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.Identifier;
 
-import java.util.function.Supplier;
+/**
+ * Where to draw the ring of particles a life steal hit leaves.
+ *
+ * <p>This was a class with a byte buffer constructor and a handle method. A packet is a payload
+ * now, so it carries its own type and stream codec and the handling lives where it is registered.
+ */
+public record LifeStealParticlesS2CPacket(double xPos, double yPos, double zPos) implements CustomPacketPayload {
+    public static final Type<LifeStealParticlesS2CPacket> TYPE = new Type<>(
+            Identifier.fromNamespaceAndPath(ArtOfForging.MOD_ID, "life_steal_particles"));
 
-public class LifeStealParticlesS2CPacket {
-    private final double xPos;
-    private final double yPos;
-    private final double zPos;
+    public static final StreamCodec<FriendlyByteBuf, LifeStealParticlesS2CPacket> STREAM_CODEC = StreamCodec.of(
+            (buffer, packet) -> {
+                buffer.writeDouble(packet.xPos());
+                buffer.writeDouble(packet.yPos());
+                buffer.writeDouble(packet.zPos());
+            },
+            buffer -> new LifeStealParticlesS2CPacket(buffer.readDouble(), buffer.readDouble(), buffer.readDouble()));
 
-    public LifeStealParticlesS2CPacket(double xPos, double yPos, double zPos) {
-        this.xPos = xPos;
-        this.yPos = yPos;
-        this.zPos = zPos;
-    }
-
-    public LifeStealParticlesS2CPacket(FriendlyByteBuf buf) {
-        this.xPos = buf.readDouble();
-        this.yPos = buf.readDouble();
-        this.zPos = buf.readDouble();
-    }
-
-    public void toBytes(FriendlyByteBuf buf) {
-        buf.writeDouble(xPos);
-        buf.writeDouble(yPos);
-        buf.writeDouble(zPos);
-    }
-
-    public boolean handle(Supplier<NetworkEvent.Context> supplier) {
-        NetworkEvent.Context context = supplier.get();
-
-        context.enqueueWork(() -> {
-            // Server to Client
-            LifeStealPacketHandler.doLifestealParticles(this.xPos, this.yPos, this.zPos);
-        });
-        return true;
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
 }

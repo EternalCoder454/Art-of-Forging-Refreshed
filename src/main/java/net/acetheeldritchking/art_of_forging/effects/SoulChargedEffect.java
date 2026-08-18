@@ -14,14 +14,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import se.mickelus.tetra.blocks.workbench.gui.WorkbenchStatsGui;
 import se.mickelus.tetra.effect.AbilityUseResult;
 import se.mickelus.tetra.effect.ChargedAbilityEffect;
@@ -43,7 +43,7 @@ public class SoulChargedEffect extends ChargedAbilityEffect {
     public static final SoulChargedEffect instance = new SoulChargedEffect();
 
     public SoulChargedEffect() {
-        super(20, 0.15D, 50, 8.0D, soulChargedEffect, TargetRequirement.either, UseAnim.BOW, "raised");
+        super(20, 0.15D, 50, 8.0D, soulChargedEffect, TargetRequirement.either, ItemUseAnimation.BOW, "raised");
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -70,7 +70,7 @@ public class SoulChargedEffect extends ChargedAbilityEffect {
                 int level = item.getEffectLevel(heldStack, soulChargedEffect);
 
                 if (level >= 2 && attacker instanceof Player player) {
-                    player.getCapability(PlayerSoulChargeProvider.PLAYER_SOUL_CHARGE).ifPresent(soul_charge -> {
+                    PlayerSoulChargeProvider.get(player).ifPresent(soul_charge -> {
                         soul_charge.addSoulCharge(1);
                         // System.out.println("Added: " + soul_charge.getSoulCharge());
 
@@ -87,7 +87,7 @@ public class SoulChargedEffect extends ChargedAbilityEffect {
     @Override
     public void perform(Player attacker, InteractionHand hand, ItemModularHandheld item, ItemStack itemStack, LivingEntity target, Vec3 hitVec, int chargedTicks) {
         if (!target.level().isClientSide()) {
-            attacker.getCapability(PlayerSoulChargeProvider.PLAYER_SOUL_CHARGE).ifPresent(soul_charge -> {
+            PlayerSoulChargeProvider.get(attacker).ifPresent(soul_charge -> {
                 // AoE
                 double radius = 5;
                 double height = 2;
@@ -117,7 +117,7 @@ public class SoulChargedEffect extends ChargedAbilityEffect {
         }
 
         attacker.swing(hand, false);
-        attacker.getCooldowns().addCooldown(item, this.getCooldown(item, itemStack));
+        attacker.getCooldowns().addCooldown(itemStack, this.getCooldown(item, itemStack));
         item.tickProgression(attacker, itemStack, 2);
         item.applyDamage(2, itemStack, attacker);
         //super.perform(attacker, hand, item, itemStack, target, hitVec, chargedTicks);
@@ -135,7 +135,7 @@ public class SoulChargedEffect extends ChargedAbilityEffect {
 
             for (LivingEntity livingTargets : targets) {
                 // System.out.println("Loop, brother");
-                livingTargets.setSecondsOnFire(seconds);
+                livingTargets.igniteForSeconds(seconds);
                 livingTargets.hurt(livingTargets.damageSources().magic(), damage);
             }
         }
@@ -144,22 +144,22 @@ public class SoulChargedEffect extends ChargedAbilityEffect {
 
     // Particles around player once perform is ready
     @SubscribeEvent
-    public void onPlayerTickEvent(TickEvent.PlayerTickEvent event) {
-        ItemStack heldStack = event.player.getMainHandItem();
+    public void onPlayerTickEvent(PlayerTickEvent.Post event) {
+        ItemStack heldStack = event.getEntity().getMainHandItem();
 
         if (heldStack.getItem() instanceof ModularItem item) {
             // Ensures particle effects
             int level = item.getEffectLevel(heldStack, soulChargedEffect);
 
             // Coords
-            double posX = event.player.getX();
-            double posY = event.player.getY(0.5D);
-            double posZ = event.player.getZ();
+            double posX = event.getEntity().getX();
+            double posY = event.getEntity().getY(0.5D);
+            double posZ = event.getEntity().getZ();
 
             if (level >= 2) {
-                event.player.getCapability(PlayerSoulChargeProvider.PLAYER_SOUL_CHARGE).ifPresent(soul_charge -> {
+                PlayerSoulChargeProvider.get(event.getEntity()).ifPresent(soul_charge -> {
                     if (soul_charge.getSoulCharge() >= 5) {
-                        ServerLevel world = (ServerLevel) event.player.level();
+                        ServerLevel world = (ServerLevel) event.getEntity().level();
                         world.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, posX, posY, posZ,
                                 1, 0.5D, 0.5D, 0.5D, 0.0D);
                     }

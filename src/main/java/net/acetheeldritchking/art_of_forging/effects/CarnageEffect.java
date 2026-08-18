@@ -7,10 +7,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import se.mickelus.tetra.blocks.workbench.gui.WorkbenchStatsGui;
 import se.mickelus.tetra.gui.stats.bar.GuiStatBar;
 import se.mickelus.tetra.gui.stats.getter.IStatGetter;
@@ -36,7 +36,7 @@ public class CarnageEffect {
     }
 
     @SubscribeEvent
-    public void onLivingAttackEvent(LivingDamageEvent event) {
+    public void onLivingAttackEvent(LivingIncomingDamageEvent event) {
         //LivingEntity target = event.getEntity();
         Entity attackingEntity = event.getSource().getEntity();
 
@@ -63,7 +63,7 @@ public class CarnageEffect {
                 float bonusDamage = baseAmount * (eff / 100);
 
                 if (level > 0 && attacker instanceof Player player) {
-                    player.getCapability(PlayerCarnageProvider.PLAYER_CARNAGE).ifPresent(carnage -> {
+                    PlayerCarnageProvider.get(player).ifPresent(carnage -> {
                         // System.out.println("Current level of carnage: " + carnage.getCarnage());
                         carnage.addCarnage(1);
 

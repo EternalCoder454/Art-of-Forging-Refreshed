@@ -1,8 +1,10 @@
 package net.acetheeldritchking.art_of_forging.capabilities.devouring;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.common.util.ValueIOSerializable;
 
-public class PlayerDevouring {
+public class PlayerDevouring implements ValueIOSerializable {
     private int devour;
     private final int MAX_DEVOUR = 30;
     private final int MIN_DEVOUR = 0;
@@ -32,11 +34,13 @@ public class PlayerDevouring {
         this.devour = source.devour;
     }
 
-    public void saveNBTdata(CompoundTag nbt) {
-        nbt.putInt("devouring", devour);
+    @Override
+    public void serialize(ValueOutput output) {
+        output.putInt("devouring", devour);
     }
 
-    public void loadNBTdata(CompoundTag nbt) {
-        devour = nbt.getInt("devouring");
+    @Override
+    public void deserialize(ValueInput input) {
+        devour = input.getIntOr("devouring", 0);
     }
 }

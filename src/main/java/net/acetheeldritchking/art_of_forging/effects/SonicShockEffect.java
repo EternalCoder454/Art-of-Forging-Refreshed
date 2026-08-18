@@ -11,10 +11,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import se.mickelus.tetra.blocks.workbench.gui.WorkbenchStatsGui;
 import se.mickelus.tetra.effect.AbilityUseResult;
 import se.mickelus.tetra.effect.ChargedAbilityEffect;
@@ -33,7 +33,7 @@ public class SonicShockEffect extends ChargedAbilityEffect {
     public static final SonicShockEffect instance = new SonicShockEffect();
 
     public SonicShockEffect() {
-        super(60, 0.15D, 450, 1.0D, sonicShockEffect, TargetRequirement.either, UseAnim.SPEAR, "raised");
+        super(60, 0.15D, 450, 1.0D, sonicShockEffect, TargetRequirement.either, ItemUseAnimation.SPEAR, "raised");
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -49,14 +49,14 @@ public class SonicShockEffect extends ChargedAbilityEffect {
 
     @Override
     public void perform(Player attacker, InteractionHand hand, ItemModularHandheld item, ItemStack itemStack, LivingEntity target, Vec3 hitVec, int chargedTicks) {
-        if (!target.level().isClientSide) {
+        if (!target.level().isClientSide()) {
             // Sonic Boom damage
             int level = item.getEffectLevel(itemStack, sonicShockEffect);
 
             AbilityUseResult result = this.doSonicBoomAttack(level, attacker, item, itemStack, target);
 
             attacker.swing(hand, false);
-            attacker.getCooldowns().addCooldown(item, this.getCooldown(item, itemStack));
+            attacker.getCooldowns().addCooldown(itemStack, this.getCooldown(item, itemStack));
             item.tickProgression(attacker, itemStack, 1);
             item.applyDamage(10, itemStack, attacker);
         }

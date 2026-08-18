@@ -1,8 +1,10 @@
 package net.acetheeldritchking.art_of_forging.capabilities.conquer;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.common.util.ValueIOSerializable;
 
-public class PlayerConquer {
+public class PlayerConquer implements ValueIOSerializable {
     private int conquer;
     private final int MAX_CONQUER = 5;
     private final int MIN_CONQUER = 0;
@@ -32,11 +34,13 @@ public class PlayerConquer {
         this.conquer = source.conquer;
     }
 
-    public void saveNBTdata(CompoundTag nbt) {
-        nbt.putInt("conquer", conquer);
+    @Override
+    public void serialize(ValueOutput output) {
+        output.putInt("conquer", conquer);
     }
 
-    public void loadNBTdata(CompoundTag nbt) {
-        conquer = nbt.getInt("conquer");
+    @Override
+    public void deserialize(ValueInput input) {
+        conquer = input.getIntOr("conquer", 0);
     }
 }

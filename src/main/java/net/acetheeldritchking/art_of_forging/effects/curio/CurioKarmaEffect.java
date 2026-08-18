@@ -8,11 +8,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import se.mickelus.tetra.blocks.workbench.gui.WorkbenchStatsGui;
 import se.mickelus.tetra.gui.stats.bar.GuiStatBar;
 import se.mickelus.tetra.gui.stats.getter.IStatGetter;
@@ -59,11 +59,11 @@ public class CurioKarmaEffect implements ICurioItem {
 
                         if (level > 0 && !player.level().isClientSide()) {
                             if (target instanceof Monster) {
-                                player.getCapability(PlayerKarmaProvider.PLAYER_KARMA).ifPresent(karma -> {
+                                PlayerKarmaProvider.get(player).ifPresent(karma -> {
                                     karma.addKarma(1);
                                 });
                             } else {
-                                player.getCapability(PlayerKarmaProvider.PLAYER_KARMA).ifPresent(karma -> {
+                                PlayerKarmaProvider.get(player).ifPresent(karma -> {
                                     karma.subKarma(1);
                                 });
                             }
@@ -75,8 +75,8 @@ public class CurioKarmaEffect implements ICurioItem {
 
     // Karma buffs/debuffs
     @SubscribeEvent
-    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        Player player = event.player;
+    public void onPlayerTick(PlayerTickEvent.Post event) {
+        Player player = event.getEntity();
 
         // Finds curio and applies effect
         CuriosApi.getCuriosInventory(player).ifPresent(inv -> inv.findCurios
@@ -84,7 +84,7 @@ public class CurioKarmaEffect implements ICurioItem {
                 slotResult -> {
                     slotResult.stack();
 
-                    if (event.player.tickCount % 20 == 0) {
+                    if (event.getEntity().tickCount % 20 == 0) {
                         ItemStack itemStack = slotResult.stack();
                         ModularItem item = (ModularItem) itemStack.getItem();
 
@@ -92,7 +92,7 @@ public class CurioKarmaEffect implements ICurioItem {
                         int level = item.getEffectLevel(itemStack, karmaInfusedEffect);
 
                         if (level > 0 && !player.level().isClientSide()) {
-                            player.getCapability(PlayerKarmaProvider.PLAYER_KARMA).ifPresent(karma -> {
+                            PlayerKarmaProvider.get(player).ifPresent(karma -> {
                                 // Do stuff here
                                 switch (karma.getKarma()) {
                                     case -5 -> {

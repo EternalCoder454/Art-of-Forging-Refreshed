@@ -8,11 +8,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import se.mickelus.tetra.blocks.workbench.gui.WorkbenchStatsGui;
 import se.mickelus.tetra.gui.stats.bar.GuiStatBar;
 import se.mickelus.tetra.gui.stats.getter.IStatGetter;
@@ -38,7 +38,7 @@ public class DevouringEffect {
     }
 
     @SubscribeEvent
-    public void onLivingAttackEvent(LivingDamageEvent event) {
+    public void onLivingAttackEvent(LivingIncomingDamageEvent event) {
         Entity attackingEntity = event.getSource().getEntity();
 
         if (attackingEntity instanceof LivingEntity attacker) {
@@ -51,11 +51,11 @@ public class DevouringEffect {
                 if (level > 0 && !attacker.level().isClientSide() && attacker instanceof Player player) {
                     // System.out.println("Reset!");
 
-                    player.getCapability(PlayerDevouringProvider.PLAYER_DEVOURING).ifPresent
+                    PlayerDevouringProvider.get(player).ifPresent
                             (PlayerDevouring::resetDevour);
 
-                    // System.out.println("Removing effect..." + PotionEffects.DEVOURING.get());
-                    player.removeEffect(PotionEffects.DEVOURING.get());
+                    // System.out.println("Removing effect..." + PotionEffects.DEVOURING);
+                    player.removeEffect(PotionEffects.DEVOURING);
                 }
             }
         }
@@ -63,11 +63,11 @@ public class DevouringEffect {
 
     // For Devouring
     @SubscribeEvent
-    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        ItemStack heldStack = event.player.getMainHandItem();
+    public void onPlayerTick(PlayerTickEvent.Post event) {
+        ItemStack heldStack = event.getEntity().getMainHandItem();
 
         // Every 5 seconds
-        if (event.player.tickCount % 100 == 0 && heldStack.getItem() instanceof ModularItem item) {
+        if (event.getEntity().tickCount % 100 == 0 && heldStack.getItem() instanceof ModularItem item) {
             // System.out.println("adding");
 
             // Potency of effect
@@ -76,28 +76,28 @@ public class DevouringEffect {
             // Duration of effect
             int eff = (int) item.getEffectEfficiency(heldStack, devouringEffect);
 
-            if (level > 0 && !event.player.hasEffect(PotionEffects.DEVOURING.get()) && !event.player.level().isClientSide()) {
-                event.player.getCapability(PlayerDevouringProvider.PLAYER_DEVOURING).ifPresent(devouring
+            if (level > 0 && !event.getEntity().hasEffect(PotionEffects.DEVOURING) && !event.getEntity().level().isClientSide()) {
+                PlayerDevouringProvider.get(event.getEntity()).ifPresent(devouring
                         -> {
                     // System.out.println("current level "+ devouring.getDevour());
 
                     devouring.addDevour(1);
 
                     if (devouring.getDevour() >= 30) {
-                        // System.out.println("Adding effect..." + PotionEffects.DEVOURING.get());
+                        // System.out.println("Adding effect..." + PotionEffects.DEVOURING);
 
-                        event.player.addEffect(new MobEffectInstance(PotionEffects.DEVOURING.get(),
+                        event.getEntity().addEffect(new MobEffectInstance(PotionEffects.DEVOURING,
                                 eff * 20, level, true, true, true));
                     }
                 });
-            } else if (heldStack.getItem() != item && event.player.hasEffect(PotionEffects.DEVOURING.get()) && !event.player.level().isClientSide()) {
+            } else if (heldStack.getItem() != item && event.getEntity().hasEffect(PotionEffects.DEVOURING) && !event.getEntity().level().isClientSide()) {
                 // System.out.println("Reset!");
 
-                event.player.getCapability(PlayerDevouringProvider.PLAYER_DEVOURING).ifPresent
+                PlayerDevouringProvider.get(event.getEntity()).ifPresent
                         (PlayerDevouring::resetDevour);
 
-                // System.out.println("Removing effect..." + PotionEffects.DEVOURING.get());
-                event.player.removeEffect(PotionEffects.DEVOURING.get());
+                // System.out.println("Removing effect..." + PotionEffects.DEVOURING);
+                event.getEntity().removeEffect(PotionEffects.DEVOURING);
             }
         }
     }

@@ -1,8 +1,10 @@
 package net.acetheeldritchking.art_of_forging.capabilities.karma;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.common.util.ValueIOSerializable;
 
-public class PlayerKarma {
+public class PlayerKarma implements ValueIOSerializable {
     private int karma;
     private final int MAX_KARMA = 5;
     private final int MIN_KARMA = -5;
@@ -32,11 +34,13 @@ public class PlayerKarma {
         this.karma = source.karma;
     }
 
-    public void saveNBTdata(CompoundTag nbt) {
-        nbt.putInt("karma", karma);
+    @Override
+    public void serialize(ValueOutput output) {
+        output.putInt("karma", karma);
     }
 
-    public void loadNBTdata(CompoundTag nbt) {
-        karma = nbt.getInt("karma");
+    @Override
+    public void deserialize(ValueInput input) {
+        karma = input.getIntOr("karma", 0);
     }
 }

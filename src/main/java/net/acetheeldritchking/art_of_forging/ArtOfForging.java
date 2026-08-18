@@ -3,42 +3,40 @@ package net.acetheeldritchking.art_of_forging;
 import com.mojang.logging.LogUtils;
 import net.acetheeldritchking.art_of_forging.effects.*;
 import net.acetheeldritchking.art_of_forging.effects.curio.*;
+import net.acetheeldritchking.art_of_forging.effects.gui.EffectGuiStats;
 import net.acetheeldritchking.art_of_forging.effects.potion.PotionEffects;
 import net.acetheeldritchking.art_of_forging.loot.ModLootModifiers;
+import net.acetheeldritchking.art_of_forging.capabilities.AoFAttachments;
+import net.acetheeldritchking.art_of_forging.item.AoFCreativeModeTab;
 import net.acetheeldritchking.art_of_forging.networking.AoFPackets;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.bus.api.IEventBus;
 import org.slf4j.Logger;
-import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.SlotTypeMessage;
-import top.theillusivec4.curios.api.SlotTypePreset;
 
-// The value here should match an entry in the META-INF/mods.toml file
+// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ArtOfForging.MOD_ID)
 public class ArtOfForging {
     public static final String MOD_ID = "art_of_forging";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public ArtOfForging() {
-        // IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        var bus = FMLJavaModLoadingContext.get().getModEventBus();
-
-
-        // Register the commonSetup method for modloading
-        // modEventBus.addListener(this::commonSetup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
-        // Curios
-        bus.addListener(this::enqueueIMC);
+    public ArtOfForging(IEventBus bus) {
+        bus.addListener(this::commonSetup);
+        bus.addListener(AoFPackets::register);
+        if (FMLEnvironment.getDist().isClient()) {
+            bus.addListener(ClientModEvents::onClientSetup);
+        }
 
         // Items //
         AoFRegistry.ITEMS.register(bus);
+
+        // The creative tab, which was never registered before //
+        AoFCreativeModeTab.register(bus);
 
         // Loot Tables //
         ModLootModifiers.register(bus);
@@ -46,102 +44,95 @@ public class ArtOfForging {
         // Potion Effects //
         PotionEffects.register(bus);
 
+        // The six per player values, which were capabilities and are attachments now //
+        AoFAttachments.ATTACHMENT_TYPES.register(bus);
+
         // Item Effects //
         // Withering
-        MinecraftForge.EVENT_BUS.register(new WitheringEffect());
+        NeoForge.EVENT_BUS.register(new WitheringEffect());
         // Storm Caller
-        MinecraftForge.EVENT_BUS.register(new StormCallerEffect());
+        NeoForge.EVENT_BUS.register(new StormCallerEffect());
         // Evoking Maw
-        MinecraftForge.EVENT_BUS.register(new EvokingMawEffect());
+        NeoForge.EVENT_BUS.register(new EvokingMawEffect());
         // Life Steal
-        MinecraftForge.EVENT_BUS.register(new LifeStealEffect());
+        NeoForge.EVENT_BUS.register(new LifeStealEffect());
         // Knockback
-        MinecraftForge.EVENT_BUS.register(new KnockbackEffect());
+        NeoForge.EVENT_BUS.register(new KnockbackEffect());
         // Life Fiber Loss
-        MinecraftForge.EVENT_BUS.register(new LifeFiberLossEffect());
+        NeoForge.EVENT_BUS.register(new LifeFiberLossEffect());
         // Cavalry
-        MinecraftForge.EVENT_BUS.register(new CavalryEffect());
+        NeoForge.EVENT_BUS.register(new CavalryEffect());
         // Dismounting
-        MinecraftForge.EVENT_BUS.register(new DismountingEffect());
+        NeoForge.EVENT_BUS.register(new DismountingEffect());
         // Dragon Mist
-        MinecraftForge.EVENT_BUS.register(new DragonMistEffect());
+        NeoForge.EVENT_BUS.register(new DragonMistEffect());
         // Disorienting
-        MinecraftForge.EVENT_BUS.register(new DisorientingEffect());
+        NeoForge.EVENT_BUS.register(new DisorientingEffect());
         // Vengeance
-        MinecraftForge.EVENT_BUS.register(new VengeanceEffect());
+        NeoForge.EVENT_BUS.register(new VengeanceEffect());
         // Resolve
-        MinecraftForge.EVENT_BUS.register(new ResolveEffect());
+        NeoForge.EVENT_BUS.register(new ResolveEffect());
         // Devouring
-        MinecraftForge.EVENT_BUS.register(new DevouringEffect());
+        NeoForge.EVENT_BUS.register(new DevouringEffect());
         // Infernal Rebuke
-        MinecraftForge.EVENT_BUS.register(new InfernalRebukeEffect());
+        NeoForge.EVENT_BUS.register(new InfernalRebukeEffect());
         // Hubris
-        MinecraftForge.EVENT_BUS.register(new HubrisEffect());
+        NeoForge.EVENT_BUS.register(new HubrisEffect());
         // Slaughtering
-        MinecraftForge.EVENT_BUS.register(new SlaughteringEffect());
+        NeoForge.EVENT_BUS.register(new SlaughteringEffect());
         // Carnage
-        MinecraftForge.EVENT_BUS.register(new CarnageEffect());
+        NeoForge.EVENT_BUS.register(new CarnageEffect());
         // Judgement
-        MinecraftForge.EVENT_BUS.register(new JudgementEffect());
+        NeoForge.EVENT_BUS.register(new JudgementEffect());
         // Retribution
-        MinecraftForge.EVENT_BUS.register(new RetributionEffect());
+        NeoForge.EVENT_BUS.register(new RetributionEffect());
         // Esoteric Edge
-        MinecraftForge.EVENT_BUS.register(new EsotericEdgeEffect());
+        NeoForge.EVENT_BUS.register(new EsotericEdgeEffect());
         // Feasting
-        MinecraftForge.EVENT_BUS.register(new FeastingEffect());
+        NeoForge.EVENT_BUS.register(new FeastingEffect());
         // Nano-Fused
-        MinecraftForge.EVENT_BUS.register(new NanoFusedEffect());
+        NeoForge.EVENT_BUS.register(new NanoFusedEffect());
         // Beheading
-        MinecraftForge.EVENT_BUS.register(new BeheadingEffect());
+        NeoForge.EVENT_BUS.register(new BeheadingEffect());
         // Soul Charged
-        MinecraftForge.EVENT_BUS.register(new SoulChargedEffect());
+        NeoForge.EVENT_BUS.register(new SoulChargedEffect());
         // Sonic Shock
-        MinecraftForge.EVENT_BUS.register(new SonicShockEffect());
+        NeoForge.EVENT_BUS.register(new SonicShockEffect());
         // Conquering
-        MinecraftForge.EVENT_BUS.register(new ConqueringEffect());
+        NeoForge.EVENT_BUS.register(new ConqueringEffect());
         // Subjugation
-        MinecraftForge.EVENT_BUS.register(new SubjugationEffect());
+        NeoForge.EVENT_BUS.register(new SubjugationEffect());
         // Goliath Slayer
-        MinecraftForge.EVENT_BUS.register(new GoliathSlayerEffect());
+        NeoForge.EVENT_BUS.register(new GoliathSlayerEffect());
 
         // Curio Effects //
         // Flame Protection
-        MinecraftForge.EVENT_BUS.register(new CurioFireResistanceEffect());
+        NeoForge.EVENT_BUS.register(new CurioFireResistanceEffect());
         // Arcane Protection
-        MinecraftForge.EVENT_BUS.register(new CurioMagicResistanceEffect());
+        NeoForge.EVENT_BUS.register(new CurioMagicResistanceEffect());
         // Strength Infused
-        MinecraftForge.EVENT_BUS.register(new CurioStrengthEffect());
+        NeoForge.EVENT_BUS.register(new CurioStrengthEffect());
         // Healing Infused
-        MinecraftForge.EVENT_BUS.register(new CurioRegenerationEffect());
+        NeoForge.EVENT_BUS.register(new CurioRegenerationEffect());
         // Karma Infused
-        MinecraftForge.EVENT_BUS.register(new CurioKarmaEffect());
+        NeoForge.EVENT_BUS.register(new CurioKarmaEffect());
         // Haste Infused
-        MinecraftForge.EVENT_BUS.register(new CurioHasteEffect());
+        NeoForge.EVENT_BUS.register(new CurioHasteEffect());
         // Third Sight
-        MinecraftForge.EVENT_BUS.register(new CurioGlowingEffect());
+        NeoForge.EVENT_BUS.register(new CurioGlowingEffect());
 
         // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(this);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        // Packets let's go!
-        event.enqueueWork(() -> {
-            AoFPackets.register();
-        });
-    }
-
-    // Curios Compat
-    // I looked at how Artifacts did it
-    public void enqueueIMC(final InterModEnqueueEvent event) {
-        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE,
-                () -> SlotTypePreset.CHARM.getMessageBuilder().size(1).build());
+        // The three charged abilities this mod adds to every handheld modular item. Tetra takes
+        // registrations for these now, so it no longer needs a mixin into its static initialiser.
+        event.enqueueWork(EffectGuiStats::setupAbilites);
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
-        @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             WitheringEffect.init();
             StormCallerEffect.init();

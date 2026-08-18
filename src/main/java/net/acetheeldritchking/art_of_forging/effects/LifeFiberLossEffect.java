@@ -5,10 +5,10 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import se.mickelus.tetra.blocks.workbench.gui.WorkbenchStatsGui;
 import se.mickelus.tetra.gui.stats.bar.GuiStatBar;
 import se.mickelus.tetra.gui.stats.getter.IStatGetter;
@@ -59,7 +59,7 @@ public class LifeFiberLossEffect {
     private void grantEffects(LivingEntity target, int duration, int level) {
         target.addEffect(new MobEffectInstance(MobEffects.REGENERATION, duration * 20,
                 level - 1, true, true, true));
-        target.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, duration * 20,
+        target.addEffect(new MobEffectInstance(MobEffects.STRENGTH, duration * 20,
                 level - 1, true, true, true));
         target.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration * 20,
                 level - 1, true, true, true));

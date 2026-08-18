@@ -1,52 +1,28 @@
 package net.acetheeldritchking.art_of_forging.capabilities.conquer;
 
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.CapabilityToken;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.common.util.LazyOptional;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.acetheeldritchking.art_of_forging.capabilities.AoFAttachments;
+import net.minecraft.world.entity.Entity;
 
-public class PlayerConquerProvider implements ICapabilityProvider, INBTSerializable {
-    public static Capability<PlayerConquer> PLAYER_CONQUER =
-            CapabilityManager.get(new CapabilityToken<PlayerConquer>() {
-                // Not overriding anything here
-            });
+import java.util.Optional;
 
-    private PlayerConquer conquer = null;
-    private final LazyOptional<PlayerConquer> optional = LazyOptional.of(this::createPlayerConquer);
+/**
+ * Reaches the conquer value hung off an entity.
+ *
+ * <p>This was a capability provider. Capabilities are gone, so it is an attachment now, and all
+ * that is left here is the lookup. It still hands back an Optional so the callers that were written
+ * against the capability api keep working unchanged.
+ */
+public class PlayerConquerProvider {
+    private PlayerConquerProvider() {
+    }
 
-    private PlayerConquer createPlayerConquer() {
-        if (this.conquer == null) {
-            this.conquer = new PlayerConquer();
+    /**
+     * {@return the conquer value for this entity, empty for anything that is not a player}
+     */
+    public static Optional<PlayerConquer> get(Entity entity) {
+        if (!(entity instanceof net.minecraft.world.entity.player.Player)) {
+            return Optional.empty();
         }
-
-        return this.conquer;
-    }
-
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == PLAYER_CONQUER) {
-            return optional.cast();
-        }
-
-        return LazyOptional.empty();
-    }
-
-    @Override
-    public Tag serializeNBT() {
-        CompoundTag nbt = new CompoundTag();
-        createPlayerConquer().saveNBTdata(nbt);
-        return nbt;
-    }
-
-    @Override
-    public void deserializeNBT(Tag nbt) {
-
+        return Optional.of(entity.getData(AoFAttachments.CONQUER));
     }
 }

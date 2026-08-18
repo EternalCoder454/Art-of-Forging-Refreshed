@@ -9,16 +9,18 @@ import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.WitherSkeleton;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.entity.monster.skeleton.Skeleton;
+import net.minecraft.world.item.component.ResolvableProfile;
+import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
+import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import se.mickelus.tetra.blocks.workbench.gui.WorkbenchStatsGui;
 import se.mickelus.tetra.gui.stats.bar.GuiStatBar;
 import se.mickelus.tetra.gui.stats.getter.IStatGetter;
@@ -72,12 +74,12 @@ public class BeheadingEffect {
                         // Looked at how Tetra Pak did this
                         headDrop = new ItemStack(Items.PLAYER_HEAD);
                         GameProfile profile = player.getGameProfile();
-                        headDrop.getOrCreateTag().put("SkullOwner", NbtUtils.writeGameProfile(new CompoundTag(), profile));
+                        headDrop.set(DataComponents.PROFILE, ResolvableProfile.createResolved(profile));
                     }
 
                     // Drop
                     if (!headDrop.isEmpty()) {
-                        boolean drop = target.level().random.nextFloat() < chance;
+                        boolean drop = target.level().getRandom().nextFloat() < chance;
 
                         if (drop) {
                             ItemEntity itemDrop = new ItemEntity

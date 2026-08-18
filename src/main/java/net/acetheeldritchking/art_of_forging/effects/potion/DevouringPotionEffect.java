@@ -5,7 +5,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
-import org.joml.Vector3f;
 
 public class DevouringPotionEffect extends MobEffect {
     public DevouringPotionEffect() {
@@ -13,20 +12,21 @@ public class DevouringPotionEffect extends MobEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
+    public boolean applyEffectTick(ServerLevel level, LivingEntity pLivingEntity, int pAmplifier) {
         pLivingEntity.hurt(pLivingEntity.damageSources().magic(), pAmplifier);
 
-        if (!pLivingEntity.level().isClientSide) {
+        if (!pLivingEntity.level().isClientSide()) {
             ServerLevel world = (ServerLevel) pLivingEntity.level();
 
-            world.sendParticles(new DustColorTransitionOptions
-                            (new Vector3f(0.5F, 0.18F, 0.18F), new Vector3f(0.95F, 0.1F, 0.1F), 1.5F),
+            world.sendParticles(new DustColorTransitionOptions(0x802e2e, 0xf21a1a, 1.5F),
                     pLivingEntity.getX(), pLivingEntity.getY(0.5), pLivingEntity.getZ(), 25, 0.5D, 0.3D, 0.5D, 0.0D);
         }
+    
+        return true;
     }
 
     @Override
-    public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
+    public boolean shouldApplyEffectTickThisTick(int pDuration, int pAmplifier) {
         return pDuration % 10 == 0;
     }
 }

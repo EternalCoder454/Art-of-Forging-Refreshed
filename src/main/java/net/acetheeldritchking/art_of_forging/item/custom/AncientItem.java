@@ -5,10 +5,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.item.component.TooltipDisplay;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class AncientItem extends Item {
     public AncientItem(Properties pProperties) {
@@ -16,9 +15,10 @@ public class AncientItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.translatable("item.ancient_item.tooltip").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
+    public void appendHoverText(ItemStack pStack, TooltipContext pContext, TooltipDisplay pDisplay,
+                                Consumer<Component> pTooltipAdder, TooltipFlag pIsAdvanced) {
+        pTooltipAdder.accept(Component.translatable("item.ancient_item.tooltip").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
 
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        super.appendHoverText(pStack, pContext, pDisplay, pTooltipAdder, pIsAdvanced);
     }
 }

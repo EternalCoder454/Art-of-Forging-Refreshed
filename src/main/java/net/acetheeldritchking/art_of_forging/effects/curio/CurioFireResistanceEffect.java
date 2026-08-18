@@ -4,10 +4,10 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import se.mickelus.tetra.blocks.workbench.gui.WorkbenchStatsGui;
 import se.mickelus.tetra.gui.stats.bar.GuiStatBar;
 import se.mickelus.tetra.gui.stats.getter.IStatGetter;
@@ -35,8 +35,8 @@ public class CurioFireResistanceEffect implements ICurioItem {
     }
 
     @SubscribeEvent
-    public void onPlayerTickEvent(TickEvent.PlayerTickEvent event) {
-        Player player = event.player;
+    public void onPlayerTickEvent(PlayerTickEvent.Post event) {
+        Player player = event.getEntity();
 
         // Finds curio and applies effect
         CuriosApi.getCuriosInventory(player).ifPresent(inv -> inv.findCurios
@@ -44,7 +44,7 @@ public class CurioFireResistanceEffect implements ICurioItem {
                         slotResult -> {
                             slotResult.stack();
 
-                            if (event.player.tickCount % 20 == 0) {
+                            if (event.getEntity().tickCount % 20 == 0) {
                                 ItemStack itemStack = slotResult.stack();
                                 ModularItem item = (ModularItem) itemStack.getItem();
 
@@ -55,7 +55,7 @@ public class CurioFireResistanceEffect implements ICurioItem {
                                 int eff = (int) item.getEffectEfficiency(itemStack, flameProtectionEffect);
 
                                 if (level > 0) {
-                                    event.player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, eff * 20,
+                                    event.getEntity().addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, eff * 20,
                                             level - 1, true, true, true));
                                 }
                             }

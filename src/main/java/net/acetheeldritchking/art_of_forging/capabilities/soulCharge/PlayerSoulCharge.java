@@ -1,8 +1,10 @@
 package net.acetheeldritchking.art_of_forging.capabilities.soulCharge;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.common.util.ValueIOSerializable;
 
-public class PlayerSoulCharge {
+public class PlayerSoulCharge implements ValueIOSerializable {
     private int soul_charge;
     private final int MAX_CHARGE = 5;
     private final int MIN_CHARGE = 0;
@@ -32,11 +34,13 @@ public class PlayerSoulCharge {
         this.soul_charge = source.soul_charge;
     }
 
-    public void saveNBTdata(CompoundTag nbt) {
-        nbt.putInt("soul_charge", soul_charge);
+    @Override
+    public void serialize(ValueOutput output) {
+        output.putInt("soul_charge", soul_charge);
     }
 
-    public void loadNBTdata(CompoundTag nbt) {
-        soul_charge = nbt.getInt("soul_charge");
+    @Override
+    public void deserialize(ValueInput input) {
+        soul_charge = input.getIntOr("soul_charge", 0);
     }
 }

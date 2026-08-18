@@ -1,8 +1,10 @@
 package net.acetheeldritchking.art_of_forging.capabilities.subjugation;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.common.util.ValueIOSerializable;
 
-public class PlayerSubjugation {
+public class PlayerSubjugation implements ValueIOSerializable {
     private int subjugation;
     private final int MAX_SUBJUGATION = 10;
     private final int MIN_SUBJUGATION = 0;
@@ -32,11 +34,13 @@ public class PlayerSubjugation {
         this.subjugation = source.subjugation;
     }
 
-    public void saveNBTdata(CompoundTag nbt) {
-        nbt.putInt("subjugation", subjugation);
+    @Override
+    public void serialize(ValueOutput output) {
+        output.putInt("subjugation", subjugation);
     }
 
-    public void loadNBTdata(CompoundTag nbt) {
-        subjugation = nbt.getInt("subjugation");
+    @Override
+    public void deserialize(ValueInput input) {
+        subjugation = input.getIntOr("subjugation", 0);
     }
 }
