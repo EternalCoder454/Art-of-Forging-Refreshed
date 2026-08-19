@@ -33,19 +33,23 @@
                         "location": "tetra:items/module/crossbow/string/compound_cross_string/"
                     },
                     {
-                        "type": "draw_0",
+                        "type": "tetra:filtered_grid_texture",
+                        "filter": "draw_0",
                         "location": "tetra:items/module/crossbow/string/compound_cross_string/0_"
                     },
                     {
-                        "type": "draw_1",
+                        "type": "tetra:filtered_grid_texture",
+                        "filter": "draw_1",
                         "location": "tetra:items/module/crossbow/string/compound_cross_string/1_"
                     },
                     {
-                        "type": "draw_2",
+                        "type": "tetra:filtered_grid_texture",
+                        "filter": "draw_2",
                         "location": "tetra:items/module/crossbow/string/compound_cross_string/2_"
                     },
                     {
-                        "type": "loaded",
+                        "type": "tetra:filtered_grid_texture",
+                        "filter": "loaded",
                         "location": "tetra:items/module/crossbow/string/compound_cross_string/2_"
                     }
                 ]

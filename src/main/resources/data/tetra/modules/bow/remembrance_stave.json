@@ -38,15 +38,18 @@
                     "location": "tetra:items/module/bow/stave/remembrance/remembrance_stave"
                 },
                 {
-                    "type": "draw_0",
+                    "type": "tetra:filtered_grid_texture",
+                    "filter": "draw_0",
                     "location": "tetra:items/module/bow/stave/remembrance/0_remembrance_stave"
                 },
                 {
-                    "type": "draw_1",
+                    "type": "tetra:filtered_grid_texture",
+                    "filter": "draw_1",
                     "location": "tetra:items/module/bow/stave/remembrance/1_remembrance_stave"
                 },
                 {
-                    "type": "draw_2",
+                    "type": "tetra:filtered_grid_texture",
+                    "filter": "draw_2",
                     "location": "tetra:items/module/bow/stave/remembrance/2_remembrance_stave"
                 },
                 {
@@ -54,17 +57,20 @@
                     "emission": 8
                 },
                 {
-                    "type": "draw_0",
+                    "type": "tetra:filtered_grid_texture",
+                    "filter": "draw_0",
                     "location": "tetra:items/module/bow/stave/remembrance/0_remembrance_stave_glow",
                     "emission": 8
                 },
                 {
-                    "type": "draw_1",
+                    "type": "tetra:filtered_grid_texture",
+                    "filter": "draw_1",
                     "location": "tetra:items/module/bow/stave/remembrance/1_remembrance_stave_glow",
                     "emission": 10
                 },
                 {
-                    "type": "draw_2",
+                    "type": "tetra:filtered_grid_texture",
+                    "filter": "draw_2",
                     "location": "tetra:items/module/bow/stave/remembrance/2_remembrance_stave_glow",
                     "emission": 15
                 }

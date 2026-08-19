@@ -45,15 +45,18 @@
 					"location": "tetra:items/module/bow/stave/dreadnought/"
 				},
 				{
-					"type": "draw_0",
+					"type": "tetra:filtered_grid_texture",
+"filter": "draw_0",
 					"location": "tetra:items/module/bow/stave/dreadnought/"
 				},
 				{
-					"type": "draw_1",
+					"type": "tetra:filtered_grid_texture",
+"filter": "draw_1",
 					"location": "tetra:items/module/bow/stave/dreadnought/1_"
 				},
 				{
-					"type": "draw_2",
+					"type": "tetra:filtered_grid_texture",
+"filter": "draw_2",
 					"location": "tetra:items/module/bow/stave/dreadnought/1_"
 				}
 			]

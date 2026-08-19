@@ -29,8 +29,7 @@
                 ],
                 "models": [
                     {
-                        "location": "tetra:items/module/crossbow/attachment/socket/",
-                        "type": "static"
+                        "location": "tetra:items/module/crossbow/attachment/socket/"
                     }
                 ]
             }
