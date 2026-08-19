@@ -229,4 +229,4 @@ variants, and the plain name went with it. One recipe, the demonic flail.
 3. `upstream` stays pointed at Ace's repository. Take future changes by rebasing onto it.
 4. No licence file, but `gradle.properties` declares MIT. Permission for this port is recorded
    above. Read it before publishing anything.
-5. No em dash, no double hyphen in prose, no semicolon, in any document here.
+5. No em dash and no double hyphen in prose, in any document here. Semicolons are fine, sparingly.
