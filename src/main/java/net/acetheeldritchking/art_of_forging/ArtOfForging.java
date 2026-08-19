@@ -137,8 +137,9 @@ public class ArtOfForging {
         // Third Sight
         NeoForge.EVENT_BUS.register(new CurioGlowingEffect());
 
-        // Register ourselves for server and other game events we are interested in
-        NeoForge.EVENT_BUS.register(this);
+        // This class carries no listener of its own. Its two handlers, onBuildContents and
+        // commonSetup, are mod bus events added by hand above, so registering it on the game bus
+        // did nothing under Forge and throws under NeoForge.
     }
 
     /**
@@ -157,7 +158,7 @@ public class ArtOfForging {
         event.enqueueWork(EffectGuiStats::setupAbilites);
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
+    /** Client only initialisation, added to the mod bus in the constructor when on a client. */
     public static class ClientModEvents {
         public static void onClientSetup(FMLClientSetupEvent event) {
             WitheringEffect.init();
