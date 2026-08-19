@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "art_of_forging:sigil_of_eden"
+            "id": "art_of_forging:sigil_of_eden"
         },
         "title": {
             "translate": "art_of_forging.advancements.materials.sigil_of_eden.title"

@@ -6,18 +6,12 @@
         " v "
     ],
     "key": {
-        "p": {
-            "item": "tetra:planar_stabilizer"
-        },
-        "c": {
-            "item": "tetra:combustion_chamber"
-        },
-        "v": {
-            "item": "art_of_forging:vobrite_crystal"
-        }
+        "p": "tetra:planar_stabilizer",
+        "c": "tetra:combustion_chamber",
+        "v": "art_of_forging:vobrite_crystal"
     },
     "result": {
-        "item": "art_of_forging:shockwave_chamber",
+        "id": "art_of_forging:shockwave_chamber",
         "count": 1
     }
 }

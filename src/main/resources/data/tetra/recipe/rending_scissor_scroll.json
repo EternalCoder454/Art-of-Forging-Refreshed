@@ -6,21 +6,11 @@
         " a "
     ],
     "key": {
-        "a": {
-            "item": "art_of_forging:life_fiber"
-        },
-        "b": {
-            "item": "minecraft:writable_book"
-        },
-        "r": {
-            "item": "art_of_forging:rending_scissor_red"
-        },
-        "p": {
-            "item": "art_of_forging:rending_scissor_purple"
-        },
-        "c": {
-            "item": "art_of_forging:life_fiber"
-        }
+        "a": "art_of_forging:life_fiber",
+        "b": "minecraft:writable_book",
+        "r": "art_of_forging:rending_scissor_red",
+        "p": "art_of_forging:rending_scissor_purple",
+        "c": "art_of_forging:life_fiber"
     },
     "result": {
         "id": "tetra:scroll_rolled",

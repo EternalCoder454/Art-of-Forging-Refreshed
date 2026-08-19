@@ -6,15 +6,11 @@
         " d "
     ],
     "key": {
-        "d": {
-            "item": "minecraft:dragon_breath"
-        },
-        "f": {
-            "item": "art_of_forging:forged_steel_ingot"
-        }
+        "d": "minecraft:dragon_breath",
+        "f": "art_of_forging:forged_steel_ingot"
     },
     "result": {
-        "item": "art_of_forging:endsteel_ingot",
+        "id": "art_of_forging:endsteel_ingot",
         "count": 4
     }
 }

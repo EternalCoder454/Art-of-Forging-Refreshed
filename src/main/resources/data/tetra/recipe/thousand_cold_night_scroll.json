@@ -6,9 +6,7 @@
         " m "
     ],
     "key": {
-        "m": {
-            "item": "art_of_forging:shards_of_malice"
-        },
+        "m": "art_of_forging:shards_of_malice",
         "s": {
             "type": "tetra:scroll",
             "key": "sword/katana/murasama_blade",

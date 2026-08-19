@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "art_of_forging:forged_steel_ingot"
+            "id": "art_of_forging:forged_steel_ingot"
         },
         "title": {
             "translate": "art_of_forging.advancements.materials.forged_steel.title"

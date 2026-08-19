@@ -6,18 +6,12 @@
         "e f"
     ],
     "key": {
-        "d": {
-            "item": "art_of_forging:dragon_soul"
-        },
-        "f": {
-            "item": "art_of_forging:forged_steel_ingot"
-        },
-        "e": {
-            "item": "art_of_forging:endsteel_ingot"
-        }
+        "d": "art_of_forging:dragon_soul",
+        "f": "art_of_forging:forged_steel_ingot",
+        "e": "art_of_forging:endsteel_ingot"
     },
     "result": {
-        "item": "art_of_forging:enigmatic_construct",
+        "id": "art_of_forging:enigmatic_construct",
         "count": 1
     }
 }

@@ -6,18 +6,12 @@
         "w  "
     ],
     "key": {
-        "s": {
-            "item": "minecraft:netherite_sword"
-        },
-        "w": {
-            "item": "minecraft:purple_wool"
-        },
-        "l": {
-            "item": "art_of_forging:life_fiber"
-        }
+        "s": "minecraft:netherite_sword",
+        "w": "minecraft:purple_wool",
+        "l": "art_of_forging:life_fiber"
     },
     "result": {
-        "item": "art_of_forging:rending_scissor_purple",
+        "id": "art_of_forging:rending_scissor_purple",
         "count": 1
     }
 }

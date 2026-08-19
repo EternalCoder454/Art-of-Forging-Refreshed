@@ -1,15 +1,11 @@
 {
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
-        {
-            "item": "art_of_forging:rending_scissor_red"
-        },
-        {
-            "item": "art_of_forging:rending_scissor_purple"
-        }
+        "art_of_forging:rending_scissor_red",
+        "art_of_forging:rending_scissor_purple"
     ],
     "result": {
-        "count": 1,
-        "item": "art_of_forging:rending_scissor_complete"
+        "id": "art_of_forging:rending_scissor_complete",
+        "count": 1
     }
 }

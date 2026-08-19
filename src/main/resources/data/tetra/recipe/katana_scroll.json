@@ -6,18 +6,10 @@
         " c "
     ],
     "key": {
-        "#": {
-            "tag": "tetra:swords"
-        },
-        "i": {
-            "item": "minecraft:iron_ingot"
-        },
-        "w": {
-            "item": "minecraft:writable_book"
-        },
-        "c": {
-            "item": "minecraft:coal_block"
-        }
+        "#": "#tetra:swords",
+        "i": "minecraft:iron_ingot",
+        "w": "minecraft:writable_book",
+        "c": "minecraft:coal_block"
     },
     "result": {
         "id": "tetra:scroll_rolled",

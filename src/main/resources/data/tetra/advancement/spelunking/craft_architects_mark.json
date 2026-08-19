@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "art_of_forging:mark_of_the_architect"
+            "id": "art_of_forging:mark_of_the_architect"
         },
         "title": {
             "translate": "tetra.advancements.spelunking.craft_architects_mark.title"

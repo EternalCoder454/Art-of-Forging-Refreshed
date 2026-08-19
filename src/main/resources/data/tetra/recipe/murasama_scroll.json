@@ -6,15 +6,9 @@
         " # "
     ],
     "key": {
-        "#": {
-            "tag": "tetra:swords"
-        },
-        "a": {
-            "item": "minecraft:netherite_ingot"
-        },
-        "w": {
-            "item": "minecraft:writable_book"
-        }
+        "#": "#tetra:swords",
+        "a": "minecraft:netherite_ingot",
+        "w": "minecraft:writable_book"
     },
     "result": {
         "id": "tetra:scroll_rolled",

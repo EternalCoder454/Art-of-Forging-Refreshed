@@ -6,15 +6,11 @@
         " f "
     ],
     "key": {
-        "s": {
-            "item": "art_of_forging:vobrite_crystal"
-        },
-        "f": {
-            "item": "art_of_forging:forged_steel_ingot"
-        }
+        "s": "art_of_forging:vobrite_crystal",
+        "f": "art_of_forging:forged_steel_ingot"
     },
     "result": {
-        "item": "art_of_forging:vobrivium_ingot",
+        "id": "art_of_forging:vobrivium_ingot",
         "count": 4
     }
 }

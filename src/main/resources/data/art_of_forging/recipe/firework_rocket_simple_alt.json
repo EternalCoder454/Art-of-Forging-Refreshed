@@ -1,15 +1,11 @@
 {
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
-        {
-            "item": "art_of_forging:potent_mixture"
-        },
-        {
-            "item": "minecraft:paper"
-        }
+        "art_of_forging:potent_mixture",
+        "minecraft:paper"
     ],
     "result": {
-        "count": 6,
-        "item": "minecraft:firework_rocket"
+        "id": "minecraft:firework_rocket",
+        "count": 6
     }
 }

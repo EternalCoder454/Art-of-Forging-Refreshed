@@ -6,15 +6,11 @@
         " s "
     ],
     "key": {
-        "s": {
-            "item": "art_of_forging:shards_of_malice"
-        },
-        "a": {
-            "item": "art_of_forging:ancient_axe"
-        }
+        "s": "art_of_forging:shards_of_malice",
+        "a": "art_of_forging:ancient_axe"
     },
     "result": {
-        "item": "art_of_forging:demonic_axe",
+        "id": "art_of_forging:demonic_axe",
         "count": 1
     }
 }

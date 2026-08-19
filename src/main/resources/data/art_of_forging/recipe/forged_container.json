@@ -6,12 +6,10 @@
         "fff"
     ],
     "key": {
-        "f": {
-            "item": "art_of_forging:forged_steel_ingot"
-        }
+        "f": "art_of_forging:forged_steel_ingot"
     },
     "result": {
-        "item": "tetra:forged_container",
+        "id": "tetra:forged_container",
         "count": 1
     }
 }

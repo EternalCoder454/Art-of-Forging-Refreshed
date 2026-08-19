@@ -6,18 +6,10 @@
         " a "
     ],
     "key": {
-        "a": {
-            "item": "minecraft:beacon"
-        },
-        "b": {
-            "item": "minecraft:writable_book"
-        },
-        "c": {
-            "item": "minecraft:netherite_ingot"
-        },
-        "d": {
-            "item": "art_of_forging:enigmatic_construct"
-        }
+        "a": "minecraft:beacon",
+        "b": "minecraft:writable_book",
+        "c": "minecraft:netherite_ingot",
+        "d": "art_of_forging:enigmatic_construct"
     },
     "result": {
         "id": "tetra:scroll_rolled",

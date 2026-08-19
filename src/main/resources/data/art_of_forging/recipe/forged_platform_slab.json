@@ -4,12 +4,10 @@
         "ppp"
     ],
     "key": {
-        "p": {
-            "item": "tetra:forged_platform"
-        }
+        "p": "tetra:forged_platform"
     },
     "result": {
-        "item": "tetra:forged_platform_slab",
+        "id": "tetra:forged_platform_slab",
         "count": 3
     }
 }

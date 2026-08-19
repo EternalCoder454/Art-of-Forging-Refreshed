@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "art_of_forging:eerie_shard"
+            "id": "art_of_forging:eerie_shard"
         },
         "title": {
             "translate": "tetra.advancements.spelunking.eerie_shard.title"

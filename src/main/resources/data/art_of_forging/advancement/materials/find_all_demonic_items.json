@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "art_of_forging:demonic_blade"
+            "id": "art_of_forging:demonic_blade"
         },
         "title": {
             "translate": "art_of_forging.advancements.materials.find_all_demonic_items.title"

@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "art_of_forging:vobrivium_ingot"
+            "id": "art_of_forging:vobrivium_ingot"
         },
         "title": {
             "translate": "art_of_forging.advancements.materials.vobrivium_ingot.title"

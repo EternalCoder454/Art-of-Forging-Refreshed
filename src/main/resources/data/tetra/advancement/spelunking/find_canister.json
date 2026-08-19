@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "art_of_forging:encoded_canister"
+            "id": "art_of_forging:encoded_canister"
         },
         "title": {
             "translate": "tetra.advancements.spelunking.find_canister.title"

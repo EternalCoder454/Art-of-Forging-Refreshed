@@ -1,9 +1,7 @@
 {
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
-        {
-            "item": "art_of_forging:mark_of_the_architect"
-        },
+        "art_of_forging:mark_of_the_architect",
         {
             "type": "tetra:scroll",
             "key": "tetra/crucible_blade",

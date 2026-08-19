@@ -1,33 +1,17 @@
 {
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
-        {
-            "item": "tetra:metal_scrap"
-        },
-        {
-            "item": "tetra:metal_scrap"
-        },
-        {
-            "item": "tetra:metal_scrap"
-        },
-        {
-            "item": "tetra:metal_scrap"
-        },
-        {
-            "item": "minecraft:netherite_scrap"
-        },
-        {
-            "item": "minecraft:netherite_scrap"
-        },
-        {
-            "item": "minecraft:iron_ingot"
-        },
-        {
-            "item": "minecraft:iron_ingot"
-        }
+        "tetra:metal_scrap",
+        "tetra:metal_scrap",
+        "tetra:metal_scrap",
+        "tetra:metal_scrap",
+        "minecraft:netherite_scrap",
+        "minecraft:netherite_scrap",
+        "minecraft:iron_ingot",
+        "minecraft:iron_ingot"
     ],
     "result": {
-        "item": "art_of_forging:resonant_alloy",
+        "id": "art_of_forging:resonant_alloy",
         "count": 4
     }
 }

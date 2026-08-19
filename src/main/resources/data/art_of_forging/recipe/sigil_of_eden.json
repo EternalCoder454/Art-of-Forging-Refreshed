@@ -6,15 +6,11 @@
         "fff"
     ],
     "key": {
-        "s": {
-            "item": "art_of_forging:shards_of_malice"
-        },
-        "f": {
-            "item": "art_of_forging:fragment_of_eden"
-        }
+        "s": "art_of_forging:shards_of_malice",
+        "f": "art_of_forging:fragment_of_eden"
     },
     "result": {
-        "item": "art_of_forging:sigil_of_eden",
+        "id": "art_of_forging:sigil_of_eden",
         "count": 1
     }
 }

@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "art_of_forging:devils_soul_gem"
+            "id": "art_of_forging:devils_soul_gem"
         },
         "title": {
             "translate": "tetra.advancements.spelunking.devils_soul_gem.title"

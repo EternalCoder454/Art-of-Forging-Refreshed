@@ -6,18 +6,10 @@
         " w "
     ],
     "key": {
-        "f": {
-            "item": "minecraft:flint_and_steel"
-        },
-        "#": {
-            "tag": "tetra:swords"
-        },
-        "c": {
-            "item": "minecraft:coal"
-        },
-        "w": {
-            "item": "minecraft:writable_book"
-        }
+        "f": "minecraft:flint_and_steel",
+        "#": "#tetra:swords",
+        "c": "minecraft:coal",
+        "w": "minecraft:writable_book"
     },
     "result": {
         "id": "tetra:scroll_rolled",

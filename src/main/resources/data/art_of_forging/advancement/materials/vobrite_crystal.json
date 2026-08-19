@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "art_of_forging:vobrite_crystal"
+            "id": "art_of_forging:vobrite_crystal"
         },
         "title": {
             "translate": "art_of_forging.advancements.materials.vobrite_crystal.title"

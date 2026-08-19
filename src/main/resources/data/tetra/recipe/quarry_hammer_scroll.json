@@ -6,15 +6,9 @@
         " s "
     ],
     "key": {
-        "b": {
-            "item": "minecraft:writable_book"
-        },
-        "c": {
-            "item": "tetra:chthonic_extractor"
-        },
-        "s": {
-            "item": "minecraft:netherite_scrap"
-        }
+        "b": "minecraft:writable_book",
+        "c": "tetra:chthonic_extractor",
+        "s": "minecraft:netherite_scrap"
     },
     "result": {
         "id": "tetra:scroll_rolled",

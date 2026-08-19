@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "art_of_forging:resonant_alloy"
+            "id": "art_of_forging:resonant_alloy"
         },
         "title": {
             "translate": "art_of_forging.advancements.materials.root.title"

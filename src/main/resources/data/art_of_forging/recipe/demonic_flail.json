@@ -6,18 +6,12 @@
         " s "
     ],
     "key": {
-        "s": {
-            "item": "art_of_forging:shards_of_malice"
-        },
-        "a": {
-            "item": "art_of_forging:ancient_flail"
-        },
-        "c": {
-            "item": "minecraft:chain"
-        }
+        "s": "art_of_forging:shards_of_malice",
+        "a": "art_of_forging:ancient_flail",
+        "c": "minecraft:chain"
     },
     "result": {
-        "item": "art_of_forging:demonic_flail",
+        "id": "art_of_forging:demonic_flail",
         "count": 1
     }
 }
