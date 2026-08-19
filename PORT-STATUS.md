@@ -229,4 +229,4 @@ variants, and the plain name went with it. One recipe, the demonic flail.
 3. `upstream` stays pointed at Ace's repository. Take future changes by rebasing onto it.
 4. No licence file, but `gradle.properties` declares MIT. Permission for this port is recorded
    above. Read it before publishing anything.
-5. Writing rules: run `python tools/check-writing-rules.py --rules`. Nothing else states them.
+5. Writing rules: run `check-writing-rules.py --rules` from [mc-tools](https://github.com/EternalCoder454/mc-tools), checked out at `Minecraft/tools`. Nothing else states them.
