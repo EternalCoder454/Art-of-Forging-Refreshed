@@ -29,12 +29,6 @@ inside Tetra Refreshed.
 
 **Java 25** is required, which is what NeoForge 26.1 runs on anyway.
 
-## ⚠️ State
-
-**It compiles and it builds. Nothing has been run.** No world has been loaded with it and no item
-has been crafted or held. Read [PORT-STATUS.md](PORT-STATUS.md) for what changed and what is known
-to be broken, and work through [PLAYTESTING.md](PLAYTESTING.md) before calling a build good.
-
 ## 📝 Credit and permission
 
 **The mod is by AceTheEldritchKing and MindFaer.** Ace gave permission on Discord on 2026-08-18 for
@@ -54,8 +48,11 @@ built jar reports. Permission for this port is recorded above and in
 
 ## 💻 For developers
 
-Build instructions, the module data formats and the port notes are in [DEV.md](DEV.md) and
-[PORT-STATUS.md](PORT-STATUS.md).
+| File | Covers |
+|---|---|
+| [DEV.md](DEV.md) | building, and the module data formats |
+| [PORT-STATUS.md](PORT-STATUS.md) | the port, and what changed on the way to 26.1.2 |
+| [PLAYTESTING.md](PLAYTESTING.md) | a checklist for testing a build |
 
 Gradle 9.7.0, ModDevGradle 2.0.144, Java 25, NeoForge 26.1.2.95. Tetra and mutil come from
 mavenLocal, so the order matters:
