@@ -1,0 +1,23 @@
+{
+    "model": {
+        "type": "minecraft:select",
+        "property": "minecraft:display_context",
+        "cases": [
+            {
+                "when": [
+                    "fixed",
+                    "ground",
+                    "gui"
+                ],
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "art_of_forging:item/mark_of_the_architect_2d"
+                }
+            }
+        ],
+        "fallback": {
+            "type": "minecraft:model",
+            "model": "art_of_forging:item/mark_of_the_architect_3d"
+        }
+    }
+}

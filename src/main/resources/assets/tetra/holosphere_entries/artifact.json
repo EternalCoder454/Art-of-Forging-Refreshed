@@ -1,5 +1,5 @@
 {
-    "item": "tetra:modular_artifact",
+    "item": "art_of_forging:modular_artifact",
     "icon": {
         "textureLocation": "tetra:textures/gui/aof_holo.png",
         "textureX": 0,

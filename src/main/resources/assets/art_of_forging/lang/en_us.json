@@ -1,4 +1,5 @@
 {
+  "creativetab.art_of_forging": "Art of Forging",
 	"art_of_forging.effect.decaying.name": "Decaying",
 	"art_of_forging.effect.decaying.tooltip": "Applies a withering effect to the target at §e%s potency§r for §e%s seconds§r.",
 	"tetra.stats.art_of_forging:decaying": "Decaying",
