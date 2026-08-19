@@ -9,6 +9,6 @@
             "chance": 0.4
         }
     ],
-    "type": "art_of_forging:add_to_table",
-    "loot_table": "art_of_forging:entities/shards_of_malice"
+    "type": "neoforge:add_table",
+    "table": "art_of_forging:entities/shards_of_malice"
 }

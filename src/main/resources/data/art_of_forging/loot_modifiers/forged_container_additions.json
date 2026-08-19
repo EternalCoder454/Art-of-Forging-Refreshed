@@ -9,6 +9,6 @@
             "chance": 0.8
         }
     ],
-    "type": "art_of_forging:add_to_table",
-    "loot_table": "art_of_forging:forged/aof_forged_loot"
+    "type": "neoforge:add_table",
+    "table": "art_of_forging:forged/aof_forged_loot"
 }

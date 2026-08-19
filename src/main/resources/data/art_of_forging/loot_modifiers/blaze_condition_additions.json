@@ -20,6 +20,8 @@
         }
     ],
     "items": [
-        "art_of_forging:soul_ember"
+        {
+            "id": "art_of_forging:soul_ember"
+        }
     ]
 }

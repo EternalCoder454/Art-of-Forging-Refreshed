@@ -133,11 +133,21 @@ replace, so whichever loaded last discarded the others along with their variants
 set `"replace": false` now. `tools/check-bundle-collisions.py` in Tetra reports any path more than
 one jar in the bundle claims.
 
-**The loot modifiers do not match their own codec.** `AddItemModifier` reads a field named `item`,
-a single item. All nine data files write `items`, a list. That mismatch predates this port and is
-carried across unchanged, so the modifiers still will not parse. Fixing it means deciding whether
-the codec should read a list or the data should name one item, which is a behaviour decision for
-Ace rather than a port step.
+**The loot modifiers work now, and none of them ever did.** They failed two different ways, both
+older than this port.
+
+Six named `art_of_forging:add_to_table`, a type nothing registers here or upstream. What they
+describe, rolling a separate loot table and adding its results, is what NeoForge's own
+`neoforge:add_table` does, and Tetra already uses it for its bastion scrolls, so they point at that
+instead of at a class nobody wrote. All six tables they name exist.
+
+Three used `add_item`, whose codec read a single `item` while every data file writes a list under
+`items`. The codec reads the list, and the entries are stacks rather than bare ids, because one of
+them is a scroll that has to carry its contents.
+
+It adds every stack listed rather than choosing between them. The author's own data settles that:
+where he wanted a roll he used a separate table and the modifier that rolls one, which is six of
+these nine.
 
 **The nbt to components port is done.** 41 files and 54 item stacks, which is every advancement
 icon, every advancement criterion and all eight scroll recipes. Every one of them had been dropped
@@ -155,8 +165,7 @@ Four shapes, each copied from a ported equivalent in Tetra rather than invented:
 Scroll data used to live under `BlockEntityTag`, because a scroll was a block entity item. It is the
 `tetra:scroll_data` component now, which is what Tetra's own scroll recipes and advancements read.
 
-One file still holds nbt, `loot_modifiers/dungeon_additions.json`, left alone on purpose because it
-fails for the different reason below.
+No file holds nbt any more.
 
 **`tetratic` and `bettercombat` compatibility data is untouched.** Neither mod is in the test pack,
 so those files were carried over as they were and have not been looked at.

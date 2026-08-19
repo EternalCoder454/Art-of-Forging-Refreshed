@@ -11,8 +11,14 @@
         }
     ],
     "items": [
-        "art_of_forging:ancient_axe",
-        "art_of_forging:ancient_blade",
-        "art_of_forging:ancient_flail"
+        {
+            "id": "art_of_forging:ancient_axe"
+        },
+        {
+            "id": "art_of_forging:ancient_blade"
+        },
+        {
+            "id": "art_of_forging:ancient_flail"
+        }
     ]
 }
