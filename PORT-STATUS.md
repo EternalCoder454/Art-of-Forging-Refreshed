@@ -142,8 +142,14 @@ describe, rolling a separate loot table and adding its results, is what NeoForge
 instead of at a class nobody wrote. All six tables they name exist.
 
 Three used `add_item`, whose codec read a single `item` while every data file writes a list under
-`items`. The codec reads the list, and the entries are stacks rather than bare ids, because one of
-them is a scroll that has to carry its contents.
+`items`. The codec reads the list now.
+
+An entry in that list is data rather than a stack, and that is what makes it load at all. A loot
+modifier is parsed during a datapack reload, and item components are unbound for the whole of one,
+so building a stack while parsing fails with "Item art_of_forging:ancient_flail does not have
+components yet". The codec reads an `id`, an optional `count` and an optional `components` patch,
+and builds the stack in `doApply` instead, which runs when loot is rolled and components are long
+since bound. Tetra's `OutcomeMaterial` defers the same way for the same reason.
 
 It adds every stack listed rather than choosing between them. The author's own data settles that:
 where he wanted a roll he used a separate table and the modifier that rolls one, which is six of
@@ -166,6 +172,24 @@ Scroll data used to live under `BlockEntityTag`, because a scroll was a block en
 `tetra:scroll_data` component now, which is what Tetra's own scroll recipes and advancements read.
 
 No file holds nbt any more.
+
+**Every remaining `item` key is ported too.** 46 files and 115 references. All of them held an item
+and no nbt, so the pass above never looked at them, and every one was still being dropped on load.
+
+| where | was | now |
+|---|---|---|
+| a stack, under `result` or `display > icon` | an `item` | an `id` |
+| an ingredient | an object holding `item` | a plain string |
+| an ingredient naming a tag | an object holding `tag` | a string starting with a hash |
+| an ingredient offering a choice | a list of objects | a list of strings |
+
+An ingredient is a plain string now, so the object around it is gone rather than renamed. A stack
+keeps its object because it can still carry a count and components. Tetra's own replacements read a
+field genuinely called `item`, so those were left alone.
+
+**The `global_loot_modifiers` index is gone.** A modifier is found by sitting in
+`data/<namespace>/loot_modifiers` now, so the old index in `data/neoforge` was read as a modifier
+itself and failed with "No key type". Tetra ships eight modifiers and no index.
 
 **`tetratic` and `bettercombat` compatibility data is untouched.** Neither mod is in the test pack,
 so those files were carried over as they were and have not been looked at.
