@@ -8,14 +8,14 @@
     "key": {
         "m": "art_of_forging:shards_of_malice",
         "s": {
-            "type": "tetra:scroll",
             "key": "sword/katana/murasama_blade",
             "schematics": [
                 ""
             ],
             "intricate": false,
             "material": 2,
-            "ribbon": "c52323"
+            "ribbon": "c52323",
+            "neoforge:ingredient_type": "tetra:scroll"
         }
     },
     "result": {

@@ -5,7 +5,9 @@
             "components": {
                 "tetra:scroll_data": {
                     "material": 2,
-                    "ribbon": "ff9612"
+                    "ribbon": "ff9612",
+                    "key": "tetra/flamberge_blade",
+                    "intricate": false
                 }
             }
         },

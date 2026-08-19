@@ -1,13 +1,7 @@
 {
     "display": {
         "icon": {
-            "id": "tetra:scroll_rolled",
-            "components": {
-                "tetra:scroll_data": {
-                    "material": 2,
-                    "ribbon": "ffffff"
-                }
-            }
+            "id": "tetra:scroll_rolled"
         },
         "title": {
             "translate": "tetra.advancements.scrolls.root.title"

@@ -5,7 +5,9 @@
             "components": {
                 "tetra:scroll_data": {
                     "material": 2,
-                    "ribbon": "ff1e00"
+                    "ribbon": "ff1e00",
+                    "key": "tetra/crucible_blade",
+                    "intricate": false
                 }
             }
         },

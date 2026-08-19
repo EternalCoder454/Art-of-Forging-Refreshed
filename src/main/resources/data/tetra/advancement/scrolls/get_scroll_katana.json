@@ -5,7 +5,9 @@
             "components": {
                 "tetra:scroll_data": {
                     "material": 2,
-                    "ribbon": "dbff10"
+                    "ribbon": "dbff10",
+                    "key": "sword/katana/katana_blade",
+                    "intricate": false
                 }
             }
         },

@@ -5,7 +5,9 @@
             "components": {
                 "tetra:scroll_data": {
                     "material": 1,
-                    "ribbon": "6b2f00"
+                    "ribbon": "6b2f00",
+                    "key": "bow/stave/dreadnought_stave",
+                    "intricate": false
                 }
             }
         },

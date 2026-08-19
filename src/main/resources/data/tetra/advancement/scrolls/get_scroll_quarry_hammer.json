@@ -5,7 +5,9 @@
             "components": {
                 "tetra:scroll_data": {
                     "material": 2,
-                    "ribbon": "fa97e9"
+                    "ribbon": "fa97e9",
+                    "key": "utilize/hammer",
+                    "intricate": false
                 }
             }
         },

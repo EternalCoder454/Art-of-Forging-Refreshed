@@ -8,7 +8,7 @@
     "key": {
         "s": "art_of_forging:shards_of_malice",
         "a": "art_of_forging:ancient_flail",
-        "c": "minecraft:chain"
+        "c": "minecraft:iron_chain"
     },
     "result": {
         "id": "art_of_forging:demonic_flail",

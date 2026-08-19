@@ -5,7 +5,9 @@
             "components": {
                 "tetra:scroll_data": {
                     "material": 2,
-                    "ribbon": "ff0042"
+                    "ribbon": "ff0042",
+                    "key": "sword/crucible/architects_crucible_blade",
+                    "intricate": true
                 }
             }
         },

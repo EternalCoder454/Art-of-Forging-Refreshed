@@ -3,14 +3,14 @@
     "ingredients": [
         "art_of_forging:mark_of_the_architect",
         {
-            "type": "tetra:scroll",
             "key": "tetra/crucible_blade",
             "schematics": [
                 ""
             ],
             "intricate": false,
             "material": 2,
-            "ribbon": "ff1e00"
+            "ribbon": "ff1e00",
+            "neoforge:ingredient_type": "tetra:scroll"
         }
     ],
     "result": {

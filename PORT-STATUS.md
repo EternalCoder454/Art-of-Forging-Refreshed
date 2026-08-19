@@ -202,6 +202,25 @@ most likely one of Ace's other mods or Tetra: Enlarged, the mod the `tetratic` d
 
 **No play testing.** See [PLAYTESTING.md](PLAYTESTING.md).
 
+**Five more faults the launch log named.** Everything above loaded, and these were what remained.
+
+**Fourteen scroll advancements were dropped.** A scroll's data needs a `key` and an `intricate`
+flag, and these icons carried only a material and a ribbon, so every one failed with "No key
+intricate". The ribbon and material in each already matched that scroll's own recipe, so the icon
+was meant to show that scroll. The key comes from the advancement's own criterion and the flag from
+the recipe. The root watches for any scroll and names none, so its icon is a plain rolled scroll
+rather than one carrying a key that would have to be invented.
+
+**Two scroll recipes named a custom ingredient the old way.** The field is
+`neoforge:ingredient_type`, not `type`, which is what Tetra's own gild scroll recipes write. Both
+failed with "No key neoforge:ingredient_type".
+
+**`minecraft:chain` is `minecraft:iron_chain` in 26.1.2.** Chains became a family with copper
+variants, and the plain name went with it. One recipe, the demonic flail.
+
+**The shockwave hammer animation named a frame that is not there.** Six frames exist, numbered 0 to
+5, and both mcmeta files listed frame 6. That is an off by one in the upstream data, not the port.
+
 ## Repository rules
 
 1. Minecraft 26.1.2, NeoForge only. Java 25.

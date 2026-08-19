@@ -5,7 +5,9 @@
             "components": {
                 "tetra:scroll_data": {
                     "material": 2,
-                    "ribbon": "c52323"
+                    "ribbon": "c52323",
+                    "key": "sword/katana/murasama_blade",
+                    "intricate": false
                 }
             }
         },

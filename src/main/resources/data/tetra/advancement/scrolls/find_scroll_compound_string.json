@@ -5,7 +5,9 @@
             "components": {
                 "tetra:scroll_data": {
                     "material": 1,
-                    "ribbon": "19e588"
+                    "ribbon": "19e588",
+                    "key": "bow/string/compound_string",
+                    "intricate": false
                 }
             }
         },

@@ -5,7 +5,9 @@
             "components": {
                 "tetra:scroll_data": {
                     "material": 2,
-                    "ribbon": "e32182"
+                    "ribbon": "e32182",
+                    "key": "tetra/rending_scissor_purple",
+                    "intricate": false
                 }
             }
         },

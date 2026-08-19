@@ -5,7 +5,9 @@
             "components": {
                 "tetra:scroll_data": {
                     "material": 1,
-                    "ribbon": "daf7a6"
+                    "ribbon": "daf7a6",
+                    "key": "sword/tonal_blade",
+                    "intricate": false
                 }
             }
         },
