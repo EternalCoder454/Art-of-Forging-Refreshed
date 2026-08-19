@@ -1,8 +1,13 @@
 {
     "display": {
         "icon": {
-            "item": "tetra:scroll_rolled",
-            "nbt": "{BlockEntityTag:{data:[{material:1,ribbon:\"daf7a6\"}]}}"
+            "id": "tetra:scroll_rolled",
+            "components": {
+                "tetra:scroll_data": {
+                    "material": 1,
+                    "ribbon": "daf7a6"
+                }
+            }
         },
         "title": {
             "translate": "tetra.advancements.scrolls.find_scroll_tonal_blade.title"
@@ -18,8 +23,14 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "tetra:scroll_rolled",
-                        "nbt": "{BlockEntityTag:{data:[{key:\"sword/tonal_blade\"}]}}"
+                        "items": [
+                            "tetra:scroll_rolled"
+                        ],
+                        "predicates": {
+                            "tetra:scroll_data": {
+                                "key": "sword/tonal_blade"
+                            }
+                        }
                     }
                 ]
             }

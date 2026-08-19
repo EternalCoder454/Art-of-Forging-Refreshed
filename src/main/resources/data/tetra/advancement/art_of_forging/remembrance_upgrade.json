@@ -1,8 +1,15 @@
 {
     "display": {
         "icon": {
-            "item": "tetra:modular_bow",
-            "nbt": "{\"id\": \"art_of_forging/remembrance_upgrade\", \"bow/stave\": \"bow/remembrance_stave\",\"bow/string\": \"bow/basic_string\",\"bow/basic_string_material\": \"basic_string/dragon_sinew\"}"
+            "id": "tetra:modular_bow",
+            "components": {
+                "minecraft:custom_data": {
+                    "id": "art_of_forging/remembrance_upgrade",
+                    "bow/stave": "bow/remembrance_stave",
+                    "bow/string": "bow/basic_string",
+                    "bow/basic_string_material": "basic_string/dragon_sinew"
+                }
+            }
         },
         "title": {
             "translate": "tetra.advancements.art_of_forging.remembrance_upgrade.title"

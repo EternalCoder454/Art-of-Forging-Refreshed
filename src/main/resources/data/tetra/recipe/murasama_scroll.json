@@ -17,19 +17,24 @@
         }
     },
     "result": {
-        "item": "tetra:scroll_rolled",
+        "id": "tetra:scroll_rolled",
         "count": 1,
-        "nbt": {
-            "BlockEntityTag": {
-                "data": [{
-                    "key": "sword/katana/murasama_blade",
-                    "schematics": [ "tetra:sword/katana/murasama_blade" ],
-                    "details": "otherworldly",
-                    "intricate": false,
-                    "material": 2,
-                    "ribbon": "c52323",
-                    "glyphs": [ 6, 7, 13, 15 ]
-                }]
+        "components": {
+            "tetra:scroll_data": {
+                "key": "sword/katana/murasama_blade",
+                "schematics": [
+                    "tetra:sword/katana/murasama_blade"
+                ],
+                "details": "otherworldly",
+                "intricate": false,
+                "material": 2,
+                "ribbon": "c52323",
+                "glyphs": [
+                    6,
+                    7,
+                    13,
+                    15
+                ]
             }
         }
     }

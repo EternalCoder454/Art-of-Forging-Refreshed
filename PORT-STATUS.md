@@ -139,9 +139,24 @@ carried across unchanged, so the modifiers still will not parse. Fixing it means
 the codec should read a list or the data should name one item, which is a behaviour decision for
 Ace rather than a port step.
 
-**42 data files still contain an `nbt` field.** A result names its item as `id` with `components`
-now, so scroll and schematic contents written as nbt strings will not apply. Secrets of Forging hit
-the same thing.
+**The nbt to components port is done.** 41 files and 54 item stacks, which is every advancement
+icon, every advancement criterion and all eight scroll recipes. Every one of them had been dropped
+on load with "No key id" or "Not a string", so none of them did anything at all.
+
+Four shapes, each copied from a ported equivalent in Tetra rather than invented:
+
+| where | was | now |
+|---|---|---|
+| advancement icon, a modular item | `item` and an nbt string | `id` and `minecraft:custom_data` |
+| advancement icon, a scroll | `item` and snbt | `id` and `tetra:scroll_data` |
+| advancement criterion | `item` and snbt | an `items` list and `predicates` |
+| recipe result | `item` and an nbt object | `id` and `tetra:scroll_data` |
+
+Scroll data used to live under `BlockEntityTag`, because a scroll was a block entity item. It is the
+`tetra:scroll_data` component now, which is what Tetra's own scroll recipes and advancements read.
+
+One file still holds nbt, `loot_modifiers/dungeon_additions.json`, left alone on purpose because it
+fails for the different reason below.
 
 **`tetratic` and `bettercombat` compatibility data is untouched.** Neither mod is in the test pack,
 so those files were carried over as they were and have not been looked at.

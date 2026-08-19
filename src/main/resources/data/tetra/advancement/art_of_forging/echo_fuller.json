@@ -1,8 +1,18 @@
 {
     "display": {
         "icon": {
-            "item": "tetra:modular_sword",
-            "nbt": "{\"id\": \"art_of_forging/echo_fuller\", \"sword/blade\": \"sword/basic_blade\",\"sword/basic_blade_material\": \"basic_blade/netherite\", \"sword/fuller\": \"sword/echo_fuller\", \"sword/echo_fuller_material\": \"echo_fuller/echo_fullerecho_shard\",\"sword/hilt\": \"sword/basic_hilt\",\"sword/basic_hilt_material\": \"basic_hilt/netherite\"}"
+            "id": "tetra:modular_sword",
+            "components": {
+                "minecraft:custom_data": {
+                    "id": "art_of_forging/echo_fuller",
+                    "sword/blade": "sword/basic_blade",
+                    "sword/basic_blade_material": "basic_blade/netherite",
+                    "sword/fuller": "sword/echo_fuller",
+                    "sword/echo_fuller_material": "echo_fuller/echo_fullerecho_shard",
+                    "sword/hilt": "sword/basic_hilt",
+                    "sword/basic_hilt_material": "basic_hilt/netherite"
+                }
+            }
         },
         "frame": "goal",
         "title": {

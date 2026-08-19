@@ -23,19 +23,26 @@
         }
     },
     "result": {
-        "item": "tetra:scroll_rolled",
+        "id": "tetra:scroll_rolled",
         "count": 1,
-        "nbt": {
-            "BlockEntityTag": {
-                "data": [{
-                    "key": "tetra/rending_scissor_complete",
-                    "schematics": [ "tetra:sword/scissor_blade_left", "tetra:sword/scissor_blade_right", "tetra:sword/rending_scissor_complete" ],
-                    "intricate": false,
-                    "details": "otherworldly",
-                    "material": 2,
-                    "ribbon": "e32182",
-                    "glyphs": [ 1, 15, 2, 13 ]
-                }]
+        "components": {
+            "tetra:scroll_data": {
+                "key": "tetra/rending_scissor_complete",
+                "schematics": [
+                    "tetra:sword/scissor_blade_left",
+                    "tetra:sword/scissor_blade_right",
+                    "tetra:sword/rending_scissor_complete"
+                ],
+                "intricate": false,
+                "details": "otherworldly",
+                "material": 2,
+                "ribbon": "e32182",
+                "glyphs": [
+                    1,
+                    15,
+                    2,
+                    13
+                ]
             }
         }
     }

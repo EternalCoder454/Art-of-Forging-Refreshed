@@ -1,22 +1,32 @@
 {
-	"display": {
-		"icon": {
-			"item": "tetra:modular_double",
-			"nbt": "{\"id\": \"art_of_forging/tomahawk_upgrade\", \"double/head_left\": \"double/tomahawk_left\",\"double/tomahawk_left_material\": \"tomahawk/iron\",\"double/head_right\": \"double/butt_right\",\"double/butt_right_material\": \"butt/iron\",\"double/handle\": \"double/basic_handle\",\"double/basic_handle_material\": \"basic_handle/oak\"}"
-		},
-		"title": {
+    "display": {
+        "icon": {
+            "id": "tetra:modular_double",
+            "components": {
+                "minecraft:custom_data": {
+                    "id": "art_of_forging/tomahawk_upgrade",
+                    "double/head_left": "double/tomahawk_left",
+                    "double/tomahawk_left_material": "tomahawk/iron",
+                    "double/head_right": "double/butt_right",
+                    "double/butt_right_material": "butt/iron",
+                    "double/handle": "double/basic_handle",
+                    "double/basic_handle_material": "basic_handle/oak"
+                }
+            }
+        },
+        "title": {
             "translate": "tetra.advancements.art_of_forging.tomahawk_upgrade.title"
         },
         "description": {
             "translate": "tetra.advancements.art_of_forging.tomahawk_upgrade.description"
         }
     },
-	"parent": "tetra:art_of_forging/root",
-	"criteria": {
+    "parent": "tetra:art_of_forging/root",
+    "criteria": {
         "module": {
             "trigger": "tetra:craft_module",
             "conditions": {
-				"module": "double/tomahawk",
+                "module": "double/tomahawk",
                 "after": {
                     "items": [
                         "tetra:modular_double"
@@ -36,7 +46,7 @@
             }
         }
     },
-	"requirements": [
+    "requirements": [
         [
             "module",
             "improvement"

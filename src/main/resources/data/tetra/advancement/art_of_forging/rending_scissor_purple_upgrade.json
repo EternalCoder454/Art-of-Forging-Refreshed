@@ -1,8 +1,13 @@
 {
     "display": {
         "icon": {
-            "item": "tetra:modular_sword",
-            "nbt": "{\"id\": \"art_of_forging/rending_scissor_purple_upgrade\", \"sword/blade\": \"sword/rending_scissor_purple\"}"
+            "id": "tetra:modular_sword",
+            "components": {
+                "minecraft:custom_data": {
+                    "id": "art_of_forging/rending_scissor_purple_upgrade",
+                    "sword/blade": "sword/rending_scissor_purple"
+                }
+            }
         },
         "frame": "challenge",
         "title": {

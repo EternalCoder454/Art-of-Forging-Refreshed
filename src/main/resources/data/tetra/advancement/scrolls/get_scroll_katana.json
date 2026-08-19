@@ -1,8 +1,13 @@
 {
     "display": {
         "icon": {
-            "item": "tetra:scroll_rolled",
-            "nbt": "{BlockEntityTag:{data:[{material:2,ribbon:\"dbff10\"}]}}"
+            "id": "tetra:scroll_rolled",
+            "components": {
+                "tetra:scroll_data": {
+                    "material": 2,
+                    "ribbon": "dbff10"
+                }
+            }
         },
         "frame": "goal",
         "title": {
@@ -19,8 +24,14 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "tetra:scroll_rolled",
-                        "nbt": "{BlockEntityTag:{data:[{key:\"sword/katana/katana_blade\"}]}}"
+                        "items": [
+                            "tetra:scroll_rolled"
+                        ],
+                        "predicates": {
+                            "tetra:scroll_data": {
+                                "key": "sword/katana/katana_blade"
+                            }
+                        }
                     }
                 ]
             }

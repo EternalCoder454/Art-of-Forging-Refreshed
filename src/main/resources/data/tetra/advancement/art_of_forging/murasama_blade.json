@@ -1,8 +1,19 @@
 {
     "display": {
         "icon": {
-            "item": "tetra:modular_sword",
-            "nbt": "{\"id\": \"art_of_forging/murasama_blade\", \"sword/blade\": \"sword/katana_blade\",\"sword/katana_blade_material\": \"katana_blade/netherite\",\"sword/hilt\": \"sword/basic_hilt\",\"sword/basic_hilt_material\": \"basic_hilt/netherite\", \"sword/guard\": \"sword/wide_guard\",\"sword/wide_guard_material\": \"wide_guard/netherite\", \"sword/blade:sword/murasama_imprv\": 0}"
+            "id": "tetra:modular_sword",
+            "components": {
+                "minecraft:custom_data": {
+                    "id": "art_of_forging/murasama_blade",
+                    "sword/blade": "sword/katana_blade",
+                    "sword/katana_blade_material": "katana_blade/netherite",
+                    "sword/hilt": "sword/basic_hilt",
+                    "sword/basic_hilt_material": "basic_hilt/netherite",
+                    "sword/guard": "sword/wide_guard",
+                    "sword/wide_guard_material": "wide_guard/netherite",
+                    "sword/blade:sword/murasama_imprv": 0
+                }
+            }
         },
         "title": {
             "translate": "tetra.advancements.art_of_forging.murasama_blade.title"

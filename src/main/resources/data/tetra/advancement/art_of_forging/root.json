@@ -1,8 +1,18 @@
 {
     "display": {
         "icon": {
-            "item": "tetra:modular_double",
-            "nbt": "{\"id\": \"art_of_forging/hammer_4\", \"double/head_left\": \"double/basic_hammer_left\",\"double/basic_hammer_left_material\": \"basic_hammer/stone\",\"double/head_right\": \"double/basic_hammer_right\",\"double/basic_hammer_right_material\": \"basic_hammer/stone\",\"double/handle\": \"double/basic_handle\",\"double/basic_handle_material\": \"basic_handle/oak\"}"
+            "id": "tetra:modular_double",
+            "components": {
+                "minecraft:custom_data": {
+                    "id": "art_of_forging/hammer_4",
+                    "double/head_left": "double/basic_hammer_left",
+                    "double/basic_hammer_left_material": "basic_hammer/stone",
+                    "double/head_right": "double/basic_hammer_right",
+                    "double/basic_hammer_right_material": "basic_hammer/stone",
+                    "double/handle": "double/basic_handle",
+                    "double/basic_handle_material": "basic_handle/oak"
+                }
+            }
         },
         "title": {
             "translate": "tetra.advancements.art_of_forging.intro.title"
