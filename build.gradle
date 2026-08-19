@@ -116,6 +116,10 @@ dependencies {
 
     // Seven curio effects and the modular artifact name this, so it is required rather than optional
     implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+
+    // EMI Refreshed resolves from mavenLocal rather than a remote, because upstream EMI stops at
+    // 1.21.1 and this is a fork. Publish it before building here, the same as mutil.
+    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
 }
 
 

@@ -46,7 +46,7 @@
                     {
                         "type": "tetra:shield",
                         "model": "tetra:plate/kite",
-                        "texture": "tetra:items/module/shield/plate/kite/"
+                        "texture": "tetra:item/module/shield/plate/kite/"
                     }
                 ]
             }

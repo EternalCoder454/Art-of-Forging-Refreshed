@@ -9,7 +9,7 @@
             {
                 "type": "tetra:shield",
                 "model": "tetra:plate/kite",
-                "texture": "tetra:items/module/shield/plate/kite/improvements/trim_bevel",
+                "texture": "tetra:item/module/shield/plate/kite/improvements/trim_bevel",
                 "tint": "inherit"
             }
         ],
@@ -20,7 +20,7 @@
                 {
                     "type": "tetra:shield",
                     "model": "tetra:plate/kite",
-                    "texture": "tetra:items/module/shield/plate/kite/improvements/"
+                    "texture": "tetra:item/module/shield/plate/kite/improvements/"
                 }
             ]
         }
@@ -35,7 +35,7 @@
             {
                 "type": "tetra:shield",
                 "model": "tetra:plate/kite",
-                "texture": "tetra:items/module/shield/plate/kite/improvements/trim_shadow",
+                "texture": "tetra:item/module/shield/plate/kite/improvements/trim_shadow",
                 "tint": "inherit"
             }
         ],
@@ -46,7 +46,7 @@
                 {
                   "type": "tetra:shield",
                   "model": "tetra:plate/kite",
-                  "texture": "tetra:items/module/shield/plate/kite/improvements/"
+                  "texture": "tetra:item/module/shield/plate/kite/improvements/"
                 }
             ]
         }
@@ -60,12 +60,12 @@
             {
                 "type": "tetra:shield",
                 "model": "tetra:plate/kite",
-                "texture": "tetra:items/module/shield/plate/kite/improvements/trim_scrap"
+                "texture": "tetra:item/module/shield/plate/kite/improvements/trim_scrap"
             },
             {
                 "type": "tetra:shield",
                 "model": "tetra:plate/kite",
-                "texture": "tetra:items/module/shield/plate/kite/improvements/trim_scrap_bevel",
+                "texture": "tetra:item/module/shield/plate/kite/improvements/trim_scrap_bevel",
                 "tint": "inherit"
             }
         ]

@@ -14,7 +14,7 @@
             {
                 "type": "tetra:shield",
                 "model": "tetra:plate/kite",
-                "texture": "tetra:items/module/shield/plate/kite/improvements/aerodynamic_trim_bevel",
+                "texture": "tetra:item/module/shield/plate/kite/improvements/aerodynamic_trim_bevel",
                 "tint": "inherit"
             }
         ],
@@ -28,7 +28,7 @@
                 {
                     "type": "tetra:shield",
                     "model": "tetra:plate/kite",
-                    "texture": "tetra:items/module/shield/plate/kite/improvements/"
+                    "texture": "tetra:item/module/shield/plate/kite/improvements/"
                 }
             ]
         }

@@ -67,7 +67,7 @@
                 },
                 "availableTextures": [ "metal", "shiny", "grainy", "crude" ],
                 "models": [{
-                    "location": "tetra:items/module/sword/blade/rending_scissor_red/"
+                    "location": "tetra:item/module/sword/blade/rending_scissor_red/"
                 }]
             }
         },
@@ -99,7 +99,7 @@
                 "textureX": 208
             },
             "models": [{
-                "location": "tetra:items/module/sword/blade/rending_scissor_red/rending_scissor_red"
+                "location": "tetra:item/module/sword/blade/rending_scissor_red/rending_scissor_red"
             }]
         }
     ]

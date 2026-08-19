@@ -42,22 +42,22 @@
 			"availableTextures": ["crude"],
 			"models": [
 				{
-					"location": "tetra:items/module/bow/stave/dreadnought/"
+					"location": "tetra:item/module/bow/stave/dreadnought/"
 				},
 				{
 					"type": "tetra:filtered_grid_texture",
 "filter": "draw_0",
-					"location": "tetra:items/module/bow/stave/dreadnought/"
+					"location": "tetra:item/module/bow/stave/dreadnought/"
 				},
 				{
 					"type": "tetra:filtered_grid_texture",
 "filter": "draw_1",
-					"location": "tetra:items/module/bow/stave/dreadnought/1_"
+					"location": "tetra:item/module/bow/stave/dreadnought/1_"
 				},
 				{
 					"type": "tetra:filtered_grid_texture",
 "filter": "draw_2",
-					"location": "tetra:items/module/bow/stave/dreadnought/1_"
+					"location": "tetra:item/module/bow/stave/dreadnought/1_"
 				}
 			]
 		}
